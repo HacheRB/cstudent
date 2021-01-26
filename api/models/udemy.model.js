@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
+const udemyInstructorSchema = require('./udemyInstructor.model').schema
 
-//Names are currently like udemy API, needs to be changed to camelCase.
-
+//Same name as Udemy API 
 const udemySchema = new mongoose.Schema({
   courseId: {
-    type: String,
-    default: ""
+    type: Number,
+    default: NaN
   },
   avg_rating: {
     type: Number,
@@ -55,7 +55,7 @@ const udemySchema = new mongoose.Schema({
     type: String,
     default: ""
   },
-  pprimary_subcategory: { // Object.title
+  primary_subcategory: { // Object.title
     type: String,
     default: ""
   },
@@ -67,9 +67,7 @@ const udemySchema = new mongoose.Schema({
     type: String,
     default: ""
   },
-  Visible_instructors: {  //Object with info about instructors. PENDIENTE
-    type: Array
-  },
+  Visible_instructors: [udemyInstructorSchema],
   content_length_video: { // In miliseconds /3600. Decimals Rule of Three to change them to minutes
     type: Number,
     default: 0

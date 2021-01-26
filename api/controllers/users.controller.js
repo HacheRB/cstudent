@@ -8,10 +8,19 @@ exports.getAllUsers = (req, res) => {
     .catch((err) => utils.handleError(err, res))
 }
 
-exports.getUserById = (req, res) => {
+exports.getUserProfile = (req, res) => {
   User
-    .findById(req.params.id)
+    .findById(res.locals.user._id)
     .then(response => res.json(response))
+    .catch(err => utils.handleError(err, res))
+}
+
+exports.getUserByUserName = (req, res) => {  //need to retrieve only some data
+  User
+    .findOne({ userName: req.params.userName }) // not sure if params or body
+    .then(user => {
+      res.json(user)
+    }) //solo devolver algunos datos
     .catch((err) => utils.handleError(err, res))
 }
 
@@ -34,8 +43,7 @@ exports.updatePassword = (req, res) => {
 
 exports.deleteUserById = (req, res) => {
   User
-    .remove({ _id: req.params.id })
+    .remove({ _id: res.locals.user.id })
     .then(response => res.json(response))
     .catch(err => utils.handleError(err, res))
 }
-

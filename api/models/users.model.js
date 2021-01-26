@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const progressSchema = require('./progress.model').schema
+const courseProgressSchema = require('./courseProgress.model').schema
 const socialSchema = require('./social.model').schema
 
 const userSchema = new mongoose.Schema({
@@ -7,12 +7,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     lowercase: true,
     trim: true,
+    unique: true,
     required: [true, 'A valid email is required'],
     validate: {
       validator: function (v) {
         return /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/.test(v);
       },
-      message: email => `${email.value} is not a valid Email !`
+      message: email => `${email.value} is not a valid email!`
     },
   },
   verified: {
@@ -34,12 +35,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     maxLength: 144,
     trim: true,
+    unique: true,
     required: [true, 'user name is required'],
     validate: {
       validator: function (v) {
         return /^[a-z0-9_-]{3,15}$/.test(v);
       },
-      message: username => `${username.value} is not a valid User name !`
+      message: username => `${username.value} is not a valid user name!`
     },
   },
   role: {
@@ -84,10 +86,12 @@ const userSchema = new mongoose.Schema({
   socialLinks: {
     socialSchema
   },
-  resources: [progressSchema]
+  coursesProgress: [courseProgressSchema]
 })
+// userSchema.pre('save', function (next) {
+
+
+// })
 
 const userModel = mongoose.model('user', userSchema)
 module.exports = userModel
-
-// use of select:

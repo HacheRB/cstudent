@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const dailySchema = require('./daily.model').schema
 
-const progressSchema = new mongoose.Schema({
+const courseProgressSchema = new mongoose.Schema({
   source: {
     type: String,
     enum: ["UDEMY"],
@@ -41,5 +41,5 @@ const progressSchema = new mongoose.Schema({
   daily: [dailySchema]
 })
 
-const progressModel = mongoose.model('progress', progressSchema)
-module.exports = progressModel
+const courseProgressModel = mongoose.model('courseProgress', courseProgressSchema)
+module.exports = courseProgressModel

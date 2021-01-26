@@ -4,7 +4,6 @@ const EMAILREGEX = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))
 //Validations 
 
 
-
 //ERROR HANDLING
 
 

@@ -1,29 +1,34 @@
-const User = require('../models/udemy.model')
+const Udemy = require('../models/udemy.model')
 const utils = require('../utils/utils')
 
 exports.getAllCourses = (req, res) => {
-  User
+  Udemy
     .find()
     .then(response => res.json(response))
     .catch((err) => utils.handleError(err, res))
 }
 
 exports.getCourseById = (req, res) => {
-  User
+  Udemy
     .findById(req.params.courseId)
     .then(response => res.json(response))
     .catch((err) => utils.handleError(err, res))
 }
 
-exports.AddCourseByUdemyId = (req, res) => {
-  console.log('pendiente de hacer')
+exports.addCourse = (req, res) => {
+  Udemy
+    .create({
+      //Aqui va los campos del model o le pasamos un  objeto json
+    })
+    .then(udemy => {
+      res.status(200).json({ udemy })
+    })
+    .catch(err => res.status(500).json(err))
 }
 
+
 exports.updateCourseById = (req, res) => {
-  console.log("<<<<<<<<<<")
-  console.log(req.params.courseId)
-  console.log("<<<<<<<<<<")
-  User
+  Udemy
     .findByIdAndUpdate(req.params.courseId, req.body, {
       new: true,
       runValidators: true
@@ -36,7 +41,7 @@ exports.updateCourseById = (req, res) => {
 }
 
 exports.deleteCourseById = (req, res) => {
-  User
+  Udemy
     .remove({ courseId: req.params.courseId })
     .then(response => res.json(response))
     .catch(err => utils.handleError(err, res))

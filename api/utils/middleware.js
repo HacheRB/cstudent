@@ -13,9 +13,6 @@ exports.authUser = (req, res, next) => {
         .findOne({ email: token.email })
         .then(user => {
           res.locals.user = user
-          console.log("<<<<<<<<<<<<<<<<<<<<<<<<")
-          console.log(res.locals.user)
-          console.log("<<<<<<<<<<<<<<<<<<<<<<<<")
           next()
         })
         .catch(err => res.json(err))
@@ -24,32 +21,9 @@ exports.authUser = (req, res, next) => {
 }
 
 exports.isAdmin = (req, res, next) => {
-  if (!token.role === "ADMIN") {
+  if (!res.locals.user.role === "ADMIN") {
     res.status(401).json({ error: 'Not enough permissions' })
   } else {
     next()
   }
-}
-
-
-exports.VerifyEmail = (req, res, next) => {
-  User
-    .findOne({
-      email: req.body.email,
-    })
-    .then(user => {
-      if (user) return res.send('Email already registered')
-      next()
-    }).catch(err => res.status(500).json(err))
-}
-
-exports.VerifyUserName = (req, res, next) => {
-  User
-    .findOne({
-      userName: req.body.userName,
-    })
-    .then(user => {
-      if (user) return res.send('Username already in use')
-      next()
-    }).catch(err => res.status(500).json(err))
 }
