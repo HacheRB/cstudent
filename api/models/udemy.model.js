@@ -5,15 +5,17 @@ const udemyInstructorSchema = require('./udemyInstructor.model').schema
 const udemySchema = new mongoose.Schema({
   courseId: {
     type: Number,
-    default: NaN
+    default: null,
+    unique: true,
+    required: true
   },
   avg_rating: {
     type: Number,
-    default: NaN
+    default: 0
   },
   avg_rating_recent: {
     type: Number,
-    default: NaN
+    default: null
   },
   created: {
     type: String,
@@ -33,7 +35,7 @@ const udemySchema = new mongoose.Schema({
   },
   is_paid: {
     type: Boolean,
-    default: ""
+    default: false
   },
   locale: {
     type: String,
@@ -41,11 +43,11 @@ const udemySchema = new mongoose.Schema({
   },
   num_lectures: {
     type: Number,
-    default: NaN
+    default: null
   },
   num_subscribers: {
     type: Number,
-    default: NaN
+    default: null
   },
   price: {
     type: String,
@@ -74,7 +76,7 @@ const udemySchema = new mongoose.Schema({
   }
 })
 
-const udemyModel = mongoose.model('udemy', udemySchema)
+const udemyModel = mongoose.model('udemycourse', udemySchema)
 module.exports = udemyModel
 
 // use of select:

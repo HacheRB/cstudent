@@ -2,7 +2,6 @@ process.stdout.write('\x1B[2J\x1B[0f') // Clear terminal screen
 require('dotenv').config()
 
 const express = require('express')
-
 const cors = require('cors')
 const helmet = require("helmet");
 const mongoose = require('mongoose')

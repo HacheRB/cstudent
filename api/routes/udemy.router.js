@@ -4,14 +4,14 @@ const middleware = require('../utils/middleware');
 
 //Maybe add a route to filter courses
 
-router.get('/', middleware.authUser, middleware.isAdmin, udemyController.getAllCourses)
+router.get('/', middleware.authUser, middleware.isAdmin, udemyController.getAllUdemyCourses)
+router.get('/:courseId', udemyController.getUdemyCourseByCourseId)
 
-router.get('/:course_id', udemyController.getCourseById)
 
-router.post('/', udemyController.addCourse)
+router.post('/', udemyController.addUdemyCourse)
 
-router.put('/:course_id', udemyController.updateCourseById)
+router.put('/:courseId', udemyController.updateUdemyCourseByCourseId)
 
-router.delete('/:course_id', middleware.authUser, middleware.isAdmin, udemyController.deleteCourseById)
+router.delete('/:courseId', middleware.authUser, middleware.isAdmin, udemyController.deleteUdemyCourseById)
 
 module.exports = router

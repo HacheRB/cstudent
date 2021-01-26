@@ -1,49 +1,51 @@
 const Udemy = require('../models/udemy.model')
 const utils = require('../utils/utils')
 
-exports.getAllCourses = (req, res) => {
+exports.getAllUdemyCourses = (req, res) => {
   Udemy
     .find()
-    .then(response => res.json(response))
+    .then(udemyCourses => res.json(udemyCourses))
     .catch((err) => utils.handleError(err, res))
 }
 
-exports.getCourseById = (req, res) => {
+exports.getUdemyCourseByCourseId = (req, res) => {
   Udemy
-    .findById(req.params.courseId)
-    .then(response => res.json(response))
-    .catch((err) => utils.handleError(err, res))
-}
-
-exports.addCourse = (req, res) => {
-  Udemy
-    .create({
-      //Aqui va los campos del model o le pasamos un  objeto json
+    .findOne({ courseId: req.params.courseId })
+    .then(udemyCourse => {
+      console.log(udemyCourse)
+      res.json(udemyCourse)
     })
-    .then(udemy => {
-      res.status(200).json({ udemy })
+    .catch((err) => utils.handleError(err, res))
+}
+
+exports.addUdemyCourse = (req, res) => {
+  console.log(req.body)
+  Udemy
+    .create(req.body)
+    //Aqui va los campos del model o le pasamos un  objeto json
+    .then(udemyCourse => {
+      res.status(200).json({ udemyCourse })
     })
     .catch(err => res.status(500).json(err))
 }
 
-
-exports.updateCourseById = (req, res) => {
+exports.updateUdemyCourseByCourseId = (req, res) => {
   Udemy
-    .findByIdAndUpdate(req.params.courseId, req.body, {
+    .findOneAndUpdate({ courseId: req.params.courseId }, req.body, {
       new: true,
       runValidators: true
     })
-    .then(response => {
-      console.log(response)
-      res.json(response)
+    .then(udemyCourse => {
+      console.log(udemyCourse)
+      res.json(udemyCourse)
     })
     .catch((err) => utils.handleError(err, res))
 }
 
-exports.deleteCourseById = (req, res) => {
+exports.deleteUdemyCourseById = (req, res) => {
   Udemy
     .remove({ courseId: req.params.courseId })
-    .then(response => res.json(response))
+    .then(udemyCourse => res.json(udemyCourse))
     .catch(err => utils.handleError(err, res))
 }
 

@@ -15,11 +15,12 @@ const courseProgressSchema = new mongoose.Schema({
   },
   initialDate: {
     type: Date,
-    default: Date.now
+    default: Date.now()
   },
   dailyEstimate: {
     type: Number,
     min: [1, 'Error, minimum value is 1'],
+    required: [true, 'Estimate is needed'],
   },
   totalProgress: {
     type: Number,
@@ -27,7 +28,8 @@ const courseProgressSchema = new mongoose.Schema({
   },
   estimateDate: {
     type: Date,
-    required: false
+    required: false,
+    default: Date.now()
   },
   status: {
     type: String,

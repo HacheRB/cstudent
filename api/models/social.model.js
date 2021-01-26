@@ -34,7 +34,7 @@ const socialSchema = new mongoose.Schema({
     type: String,
     maxLength: 144,
     trim: true,
-    default: "",
+    default: ""
   }
 })
 

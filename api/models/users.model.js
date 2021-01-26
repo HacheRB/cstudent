@@ -83,15 +83,9 @@ const userSchema = new mongoose.Schema({
     default: "",
     required: false
   },
-  socialLinks: {
-    socialSchema
-  },
+  socialLinks: socialSchema,
   coursesProgress: [courseProgressSchema]
 })
-// userSchema.pre('save', function (next) {
-
-
-// })
 
 const userModel = mongoose.model('user', userSchema)
 module.exports = userModel
