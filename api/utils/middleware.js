@@ -12,6 +12,7 @@ exports.authUser = (req, res, next) => {
       User
         .findOne({ email: token.email })
         .then(user => {
+          console.log(user)
           res.locals.user = user
           next()
         })

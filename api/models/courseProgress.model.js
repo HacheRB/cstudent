@@ -24,7 +24,8 @@ const courseProgressSchema = new mongoose.Schema({
   },
   totalProgress: {
     type: Number,
-    min: [1, 'Error, minimum value is 1'],
+    min: [0, 'Error, minimum value is 0'],
+    default: 0
   },
   estimateDate: {
     type: Date,

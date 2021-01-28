@@ -4,6 +4,7 @@ const User = require('../models/users.model')
 
 exports.register = (req, res) => {
   if (req.body && req.body.password) {
+    console.log("entra en register")
     const encryptedPwd = bcrypt.hashSync(req.body.password, 10)
     User
       .create({
@@ -34,10 +35,10 @@ exports.login = (req, res) => {
           const token = jwt.sign(data, process.env.SECRET)
           res.status(200).json({ token: token, email: user.email, userName: user.userName })
         } else {
-          res.send('passwords do not match')
+          res.send('Incorrect Password')
         }
       } else {
-        res.send('User email not found')
+        res.send('Email is not registered')
       }
     })
     .catch(err => {
