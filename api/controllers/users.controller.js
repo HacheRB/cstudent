@@ -101,47 +101,6 @@ exports.updateUser = (req, res) => {
     .catch((err) => utils.handleError(err, res))
 }
 
-exports.updateUser2 = (req, res) => {
-  if (!req.body) {
-    res.status(401).send("No edits")
-  }
-  User.findById(res.locals.user.id)
-    .then(user => {
-      if (!user) { return res.status(401).send("No User found)"); }
-
-      //NOTE  only update fields that were actually passed...
-      updatedata.username = udpàtedata.username || user.username
-      if (typeof updateData.username !== 'undefined') {
-        user.username = updateData.username;
-      }
-      if (typeof updateData.email !== 'undefined') {
-        user.email = updateData.email;
-      }
-      if (typeof updateData.first_name !== 'undefined') {
-        user.email = updateData.email;
-      }
-      if (typeof updateData.last_name !== 'undefined') {
-        user.email = updateData.email;
-      }
-      if (typeof updateData.bio !== 'undefined') {
-        user.bio = updateData.bio;
-      }
-      if (typeof updateData.image !== 'undefined') {
-        user.image = updateData.image;
-      }
-      if (typeof updateData.password !== 'undefined') {
-        user.setPassword(updateData.password);
-      }
-      return user.save()
-        .then(function () {
-          return res.json({ user: user.toAuthJSON() });
-        });
-    }).catch(() => {
-      res.status(422).send({ "message": "couldn't update user" })
-    }
-    );
-};
-
 //Problemas con esto
 exports.updateCourseProgress = (req, res) => {
   console.log(res.locals.user._id)
@@ -153,7 +112,6 @@ exports.updateCourseProgress = (req, res) => {
     })
     .catch(err => utils.handleError(err, res))
 }
-
 
 /*
 */

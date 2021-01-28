@@ -1,6 +1,7 @@
 const Udemy = require('../models/udemy.model')
 const utils = require('../utils/utils')
 
+
 exports.getAllUdemyCourses = (req, res) => {
   Udemy
     .find()
