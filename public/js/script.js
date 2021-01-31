@@ -1,35 +1,34 @@
-document.getElementById('register-bt').addEventListener("click", function () {
-  console.log("entra en click")
+document.getElementById('signup').addEventListener("click", function () {
+  console.log("primera entrada")
   axios.post('http://localhost:3000/api/auth/register', {
-    userName: document.getElementById('register_username').value,
-    email: document.getElementById('register_email').value,
-    password: document.getElementById('register_password').value,
+    userName: document.getElementById('signup_name').value,
+    email: document.getElementById('signup_email').value,
+    password: document.getElementById('signup_password').value
   })
     .then(function (response) {
+      console.log("segunda entrada")
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('email', response.data.email)
-      localStorage.setItem('userName', response.data.userName)
-      goEditProfile()
+      localStorage.setItem('name', response.data.userName)
+      goHome()
     })
     .catch(function (error) {
-      alert('Email or Username already registered!')
-      window.location.assign("./index.html")
+      console.log(error)
+      alert('User Already registered!')
     });
 })
 
 document.getElementById('login').addEventListener("click", function () {
-  console.log("entra en click login")
-  const data = {
+  axios.post('http://localhost:3000/api/auth/login', {
     email: document.getElementById('login_email').value,
     password: document.getElementById('login_password').value
-  }
-  axios.post('http://localhost:3000/api/auth/login', data)
+  })
     .then(function (response) {
       if (response.data && response.data.token) {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('email', response.data.email)
-        localStorage.setItem('userName', response.data.userName)
-        goEditProfile()
+        localStorage.setItem('userNname', response.data.userName)
+        goHome()
       } else {
         alert('Email or Password Wrong!')
       }
@@ -41,9 +40,4 @@ document.getElementById('login').addEventListener("click", function () {
 
 function goHome() {
   window.location = "http://localhost:3000/home.html"
-}
-
-function goEditProfile() {
-  window.location = "http://localhost:3000/editProfile.html"
-
 }

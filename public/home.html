@@ -7,14 +7,110 @@
   <title>HOME</title>
   <script src="js/protect.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 
 <body>
   <h2>MY POSTS</h2>
-  <button id="logout">LOGOUT</button>
 
   <ul id="posts">
   </ul>
+
+
+
+  <!-- NAVBAR -->
+  <div class="d-flex  justify-content-between align-items-start row-hl bg-secondary">
+    <!-- LOGO-->
+    <div class=" item-hl">
+      <a class="text-white navbar-brand" href="#">CStudent</a>
+    </div>
+    <!-- /LOGO -->
+    <!-- CENTER/SEARCH -->
+    <div class=" item-hl">search</div>
+    <!-- /CENTER/SEARCH -->
+    <!-- Right side, options and notifications -->
+    <div class=" item-hl right-side-menu">
+      <!-- CAMPANA NOTIFICACIONES -->
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-bell-fill"
+          viewBox="0 0 16 16">
+          <path
+            d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+        </svg>
+        <!-- /CAMPANA NOTIFICACIONES -->
+      </a>
+      <!-- GEAR OPTIONS -->
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <!-- GEAR SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-gear-fill"
+          viewBox="0 0 16 16">
+          <path
+            d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+        </svg>
+        <!-- /GEAR SVG -->
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="#">Logged in as ${localStorage.getItem("userName")</a></li>
+        <hr class="dropdown-divider">
+        <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+        <li>
+        </li>
+        <li><a class="dropdown-item" id="logout" href="#">Log out</a></li>
+      </ul>
+      <!-- /GEAR OPTIONS -->
+    </div>
+    <!-- /Right side, options and notifications -->
+  </div>
+  <!-- /NAVBAR -->
+
+  <!-- ADD COURSE -->
+  <form>
+    <div class=" d-flex col-12">
+      <div class="input-group mb-3">
+        <button class="btn btn-outline-secondary dropdown-toggle bg-primary text-white" type="button"
+          data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Udemy </a></li>
+          <li><a class="dropdown-item" href="#">Book</a></li>
+          <li><a class="dropdown-item" href="#">Coursera</a></li>
+        </ul>
+        <label for="user_string_search" class="visually-hidden">User's Search</label>
+        <input name="user_string_search" type="text" id="user_string_search" class="form-control"
+          aria-label="Text input with dropdown button">
+        <button id="resource_search" class=" btn btn-lg btn-primary">Search</button>
+        </p>
+      </div>
+      <!-- /DROPDOWN-->
+    </div>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body udemy-search-results">
+        <!-- EXAMPLE CARD -->
+        <div class="card" style="width: 18rem;">
+          <img src="" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+              content.
+            </p>
+            <a href="#" class="btn btn-primary">Select</a>
+          </div>
+        </div>
+        <!-- EXAMPLE CARD -->
+      </div>
+    </div>
+  </form>
+  <!-- DROPDOWN-->
+  <!-- /ADD COURSE -->
+
+
+  <ul id="search_results">
+  </ul>
+
 
   <script src="js/home.js"></script>
 </body>

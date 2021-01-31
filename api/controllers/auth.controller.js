@@ -4,7 +4,6 @@ const User = require('../models/users.model')
 
 exports.register = (req, res) => {
   if (req.body && req.body.password) {
-    console.log("entra en register")
     const encryptedPwd = bcrypt.hashSync(req.body.password, 10)
     User
       .create({
