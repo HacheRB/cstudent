@@ -3,6 +3,16 @@ input {
   margin: 10px;
 }
 div {
-  margin: 50px 0;
   border-bottom: 3px solid blue;
+}
+
+.progress-card {
+  margin: auto;
+  width:auto;
+  height:auto;
+}
+
+.card-container{
+  display:inline-flex
+  flex-direction:row;
 }

@@ -18,13 +18,14 @@ axios
   .then(response => {
     console.log('progress bar ----------------------------------')
     console.log(response.data)
-    const courses2 = document.getElementById('user-progress-list2');
+    const courses2 = document.getElementById('users-progress2');
     response.data.forEach(post => {
       console.log('for each ----------------------------------')
       console.log(post.source)
       const coursesito = showCourseProgressCard(post)
       console.log(coursesito)
-      const newPost2 = document.createElement('li')
+      const newPost2 = document.createElement("div");
+      newPost2.className = "card-container d-inline-flex p-2 bd-highlight";
       newPost2.innerHTML = coursesito;
       courses2.appendChild(newPost2)
     })
@@ -65,7 +66,7 @@ document.getElementById('logout').addEventListener("click", function () {
 function showCourseProgressCard(obj) {
   return `
   <!-- EXAMPLE CARD -->
-      <div class="card" style="width: 18rem;">
+      <div class="card progress-card" style="width: 18rem;">
         <img src="{obj.image_125_H}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{obj.title}</h5>
