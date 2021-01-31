@@ -14,11 +14,9 @@ exports.getUdemyCoursesBySearchString = (req, res) => {
     },
     timeout: 5000
   })
-    .then(function (courses) {
-
-      console.log("esto es courses.data !!!!!!!!!!!!!!!!")
-      console.log(courses.data)
-      res.status(200).json(courses.data)
+    .then(courses => {
+      console.log(courses.data.results)
+      res.status(200).json(courses.data.results)
     })
     .catch(err => utils.handleError(err, res))
 }
@@ -37,11 +35,9 @@ exports.getUdemyCoursesBySearchString2 = (req, res) => {
     timeout: 5000
   })
     .then(courses => {
-      let mapped = []
-
+      const mapped = []
       courses.data.map(obj => {
-        let instructors = []
-
+        const instructors = []
         obj.Visible_instructors.map(instructor => {
           instructors.push({
             title: instructor.title,
@@ -74,9 +70,9 @@ exports.getUdemyCoursesBySearchString2 = (req, res) => {
           Visible_instructors: instructors
         })
       })
-      console.log(array)
-      console.log(mapped)
       res.status(200).json(mapped)
+      next()
     })
     .catch(err => utils.handleError(err, res))
 }
+

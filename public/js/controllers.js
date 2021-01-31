@@ -1,5 +1,3 @@
-
-
 function checkIfCourseExists(obj) {
   axios
     .post(`http://localhost:3000/api/udemy/`, {
@@ -81,3 +79,25 @@ function showCourseCard(obj) {
       <!-- EXAMPLE CARD -->
   `
 }
+
+function showCourseProgressCard(obj) {
+  return `
+  <!-- EXAMPLE CARD -->
+      <div class="card" style="width: 18rem;">
+        <img src="{obj.image_125_H}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{obj.title}</h5>
+          <p class="card-text">{obj.headline}
+          </p>
+          <div class="progress">
+  <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+        </div>
+      </div>
+      <!-- EXAMPLE CARD -->
+  `
+
+}
+
+
+export { checkIfCourseExists, addUdemyCourse, showCourseCard, showCourseProgressCard }

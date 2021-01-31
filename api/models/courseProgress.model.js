@@ -4,8 +4,8 @@ const dailySchema = require('./daily.model').schema
 const courseProgressSchema = new mongoose.Schema({
   source: {
     type: String,
-    enum: ["UDEMY"],
-    default: "UDEMY"
+    enum: ["udemycourse"],
+    default: "udemycourse"
   },
   material_id: {
     type: String,
