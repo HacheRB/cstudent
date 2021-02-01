@@ -1,9 +1,9 @@
+body {
+  background-color: grey;
+}
 input {
   display: block;
   margin: 10px;
-}
-div {
-  border-bottom: 3px solid blue;
 }
 
 .progress-card {
@@ -13,6 +13,6 @@ div {
 }
 
 .card-container{
-  display:inline-flex
+  display:inline-flex;
   flex-direction:row;
 }

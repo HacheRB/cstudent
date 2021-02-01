@@ -15,6 +15,6 @@ router.put('/me', middleware.authUser, userController.updateUser)
 router.put('/me/password', middleware.authUser, userController.updatePassword)
 
 router.delete('/me', middleware.authUser, userController.deleteUserById)
-router.delete('/me/courses/:id', middleware.authUser, userController.deleteUserCourseById) //
+router.delete('/me/courses/:id', middleware.authUser, userController.deleteUserCourseById)
 
 module.exports = router

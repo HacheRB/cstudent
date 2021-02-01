@@ -10,7 +10,7 @@ document.getElementById('signup').addEventListener("click", function () {
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('email', response.data.email)
       localStorage.setItem('name', response.data.userName)
-      goHome()
+      goEditProfile()
     })
     .catch(function (error) {
       console.log(error)
@@ -28,7 +28,7 @@ document.getElementById('login').addEventListener("click", function () {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('email', response.data.email)
         localStorage.setItem('userNname', response.data.userName)
-        goHome()
+        goEditProfile()
       } else {
         alert('Email or Password Wrong!')
       }
@@ -40,4 +40,7 @@ document.getElementById('login').addEventListener("click", function () {
 
 function goHome() {
   window.location = "http://localhost:3000/home.html"
+}
+function goEditProfile() {
+  window.location = "http://localhost:3000/editProfile.html"
 }

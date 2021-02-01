@@ -1,45 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <title>CStudent</title>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <title>Hola!</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="./css/styles.css">
 </head>
+
 <body>
-  <h1>Welcome to Reboot</h1>
+  <!-- Main Container -->
+  <div class="container-fluid w-100 h-100">
+    <div class="row  d-flex align-items-center">
+      <!-- Left Box -->
+      <div class="col-lg-6">
+        <h1 class="text-white">CStudent</h1>
+        <p class="text-white"> Hold yourself Accountable, stop procrastinating!
+        </p>
+      </div>
+      <!-- Right Box -->
+      <div class="col-lg-6">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="sign-in-tab" data-bs-toggle="tab" href="#sign-in" role="tab"
+              aria-controls="sign-in" aria-selected="true">Sign In</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="register-tab" data-bs-toggle="tab" href="#register" role="tab"
+              aria-controls="register" aria-selected="false">Register</a>
+          </li>
+        </ul>
+        <!-- tab content -->
+        <div class="tab-content" id="myTabContent">
+          <!-- Sign In tab content -->
+          <div class="tab-pane fade show active mt-5" id="sign-in" role="tabpanel" aria-labelledby="sign-in-tab">
+            <!-- Sign In form -->
+            <form>
+              <label for="login_email" class="visually-hidden">Email address</label>
+              <input name="login_email" type="email" id="login_email" class="form-control mb-3"
+                placeholder="Email address" required="" autofocus="">
+              <label for="login_password" class="visually-hidden">Password</label>
+              <input name="login_password" type="password" id="login_password" class="form-control"
+                placeholder="Password" required="">
+              <div class="checkbox mb-3 mt-3">
+                <label>
+                  <input type="checkbox" value="remember-me"> Remember me
+                </label>
+              </div>
+              <button type="button" id="login" class="w-100 btn btn-lg btn-primary">Login</button>
+            </form>
+          </div>
+          <!-- Register tab content -->
+          <div class="tab-pane fade mt-5" id="register" role="tabpanel" aria-labelledby="register-tab">
+            <!-- Register In form -->
+            <form>
+              <label for="signup_name" class="visually-hidden">Username</label>
+              <input name="signup_name" type="text" id="signup_name" class="form-control mb-3" placeholder="Username"
+                required="" autofocus="">
+              <label for="signup_email" class="visually-hidden">Email address</label>
+              <input name="signup_email" type="email" id="signup_email" class="form-control mb-3"
+                placeholder="Email address" required="" autofocus="">
+              <label for="signup_password" class="visually-hidden">Password</label>
+              <input name="signup_password" type="password" id="signup_password" class="form-control"
+                placeholder="Password" required="">
+              <label for="register_confirm_password" class="visually-hidden">Confirm Password</label>
+              <input name="register_confirm_password" type="password" id="register_confirm_password"
+                class="form-control" placeholder="Confirm Password" required="">
+              <div class="checkbox mb-3 mt-3">
+                <label>
+                  <input type="checkbox" value="remember-me"> Remember me
+                </label>
+              </div>
+              <button type="button" id="signup" class="w-100 btn btn-lg btn-primary">Register</button>
+              <p class="mt-5 mb-3 text-muted">© 2017-2021</p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--End of Main Row -->
+    </div>
+  </div>
 
-  <h2>Sign Up</h2>
 
-  <label for="signup_name">
-    name
-    <input type="text" id="signup_name" name="signup_name">
-  </label>
-  <label for="signup_email">
-    email
-    <input type="text" id="signup_email" name="signup_email">
-  </label>
-  <label for="signup_password">
-    password
-    <input type="password" id="signup_password" name="signup_password">
-  </label>
-  <button id="signup">SIGN UP</button>
+  <footer class="fixed-bottom">
+    <ul class="nav d-flex justify-content-center mb-1">
+      <li class="nav-item">
+        <a class="nav-link text-white" aria-current="page" href="#">Terms of Use</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Help</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Cookies</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Privacy</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Contact</a>
+      </li>
+    </ul>
+  </footer>
 
-  <hr>
 
-  <h2>Login</h2>
-
-  <label for="login_email">
-    email
-    <input type="text" id="login_email" name="login_email">
-  </label>
-  <label for="login_password">
-    password
-    <input type="password" id="login_password" name="login_password">
-  </label>
-  <button id="login">LOGIN</button>
-
+  <!-- -->
+  <!-- -->
+  <!-- -->
   <script src="js/script.js"></script>
+
 </body>
+
 </html>
