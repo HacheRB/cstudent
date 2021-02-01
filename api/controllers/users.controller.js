@@ -89,14 +89,17 @@ exports.addCourseProgress = (req, res) => {
 }
 
 exports.updateUser = (req, res) => {
+  console.log("req body <<<<<<<<<<<<<<<<<<<<<")
+  console.log(req.body)
+  console.log("req body <<<<<<<<<<<<<<<<<<<<<")
+
   User
     .findByIdAndUpdate(res.locals.user.id, req.body, {
       new: true,
       runValidators: true
     })
     .then(user => {
-      console.log(user)
-      res.json(user)
+      res.send(`Congratulations ${user.userName}, your profile was updated`)
     })
     .catch((err) => utils.handleError(err, res))
 }
