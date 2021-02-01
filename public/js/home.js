@@ -1,7 +1,7 @@
 window.onload = () => {
 }
 
-//User Progress
+/*User Progress
 axios
   .get('http://localhost:3000/api/users/me/courses', { headers: { token: localStorage.getItem('token') } })
   .then(response => {
@@ -12,6 +12,7 @@ axios
       courses.appendChild(newPost)
     })
   })
+  */
 
 axios
   .get('http://localhost:3000/api/users/me/courses', { headers: { token: localStorage.getItem('token') } })
@@ -22,7 +23,7 @@ axios
     response.data.forEach(post => {
       console.log('for each ----------------------------------')
       console.log(post.source)
-      const coursesito = showCourseProgressCard(post)
+      const coursesito = showCourseProgressCard(post.material_id.image_125_H, post.material_id.title, post.material_id.headline)
       console.log(coursesito)
       const newPost2 = document.createElement("div");
       newPost2.className = "card-container d-inline-flex p-2 bd-highlight";

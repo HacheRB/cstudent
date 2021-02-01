@@ -10,18 +10,18 @@ exports.getAllUsers = (req, res) => {
 }
 
 exports.getUserProfile = (req, res) => {
-  User
-    .findById(res.locals.user._id)
-    .then(user => res.json(user))
-    .catch(err => utils.handleError(err, res))
+  res.send(res.locals.user)
+
 }
 
 exports.getUserCourses = (req, res) => {
   console.log(res.locals.user._id)
   User
     .findById(res.locals.user._id)
+    .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
+
     .then(user => {
-      console.log(user.courseProgress)
+      console.log(user)
       res.json(user.coursesProgress)
     })
     .catch(err => utils.handleError(err, res))

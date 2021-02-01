@@ -8,10 +8,9 @@ const courseProgressSchema = new mongoose.Schema({
     default: "udemycourse"
   },
   material_id: {
-    type: String,
-    maxLength: 144,
-    trim: true,
+    type: mongoose.Schema.Types.ObjectId,
     required: [true, 'A Identifier for the material is required'],
+    ref: "udemycourse"
   },
   initialDate: {
     type: Date,
