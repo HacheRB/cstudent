@@ -63,14 +63,14 @@ document.getElementById('logout').addEventListener("click", function () {
 
 
 
-function showCourseProgressCard(obj) {
+function showCourseProgressCard(img, title, headline) {
   return `
   <!-- EXAMPLE CARD -->
       <div class="card progress-card" style="width: 18rem;">
-        <img src="{obj.image_125_H}" class="card-img-top" alt="...">
+        <img src="${img}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">{obj.title}</h5>
-          <p class="card-text">{obj.headline}
+          <h5 class="card-title">${title}</h5>
+          <p class="card-text">${headline}
           </p>
           <div class="progress">
   <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>

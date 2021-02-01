@@ -2,6 +2,21 @@ const validator = require('validator')
 const axios = require('axios')
 const utils = require('../utils/utils')
 
+function transform(instructors) {
+  return instructors.map(instructor => {
+    return {
+      title: instructor.title,
+      name: instructor.name,
+      display_name: instructor.display_name,
+      job_title: instructor.job_title,
+      image_50x50: instructor.image_50x50,
+      image_100x100: instructor.image_100x100,
+      initials: instructor.initials,
+      url: instructor.url
+    }
+  })
+}
+
 exports.getUdemyCoursesBySearchString = (req, res) => {
   const userString = req.query.userSearch
   axios.get("https://www.udemy.com/api-2.0/courses/", {
@@ -34,44 +49,28 @@ exports.getUdemyCoursesBySearchString2 = (req, res) => {
     },
     timeout: 5000
   })
-    .then(courses => {
-      const mapped = []
-      courses.data.map(obj => {
-        const instructors = []
-        obj.Visible_instructors.map(instructor => {
-          instructors.push({
-            title: instructor.title,
-            name: instructor.name,
-            display_name: instructor.display_name,
-            job_title: instructor.job_title,
-            image_50x50: instructor.image_50x50,
-            image_100x100: instructor.image_100x100,
-            initials: instructor.initials,
-            url: instructor.url,
-          })
-        })
-        mapped.push({
-          courseId: obj.id,
-          avg_rating: obj.avg_rating,
-          avg_rating_recent: obj.avg_rating_recent,
-          created: obj.created,
-          description: obj.description,
-          headline: obj.headline,
-          image_125_H: obj.image_125_H,
-          is_paid: obj.is_paid,
-          locale: obj.locale,
-          num_lectures: obj.num_lectures,
-          num_subscribers: obj.num_subscribers,
-          price: obj.price,
-          primary_category: obj.primary_category,
-          primary_subcategory: obj_subcategory,
-          title: obj.title,
-          url: obj.url,
-          Visible_instructors: instructors
-        })
-      })
-      res.status(200).json(mapped)
-      next()
+    .then(response => {
+      res.status(200).json(response.data.results.map(course => {
+        return {
+          courseId: course.id,
+          avg_rating: course.avg_rating,
+          avg_rating_recent: course.avg_rating_recent,
+          created: course.created,
+          description: course.description,
+          headline: course.headline,
+          image_125_H: course.image_125_H,
+          is_paid: course.is_paid,
+          locale: course.locale,
+          num_lectures: course.num_lectures,
+          num_subscribers: course.num_subscribers,
+          price: course.price,
+          primary_category: course.primary_category,
+          primary_subcategory: course.subcategory,
+          title: course.title,
+          url: course.url,
+          visible_instructors: transform(course.visible_instructors)
+        }
+      }))
     })
     .catch(err => utils.handleError(err, res))
 }
