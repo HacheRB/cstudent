@@ -17,16 +17,16 @@
 
 <body>
   <!-- Main Container -->
-  <div class="container-fluid w-100 h-100">
-    <div class="row  d-flex align-items-center">
+  <div class="container-xxl w-100 h-100">
+    <div class="row d-xl-flex justify-content-center">
       <!-- Left Box -->
-      <div class="col-lg-6">
-        <h1 class="text-white">CStudent</h1>
-        <p class="text-white"> Hold yourself Accountable, stop procrastinating!
+      <div class=" col-10 col-xl-6 rounded d-flex flex-column justify-content-center align-items-center">
+        <h1 class="text-main" id="cstudent-title">CStudent</h1>
+        <p class="text-main text-center"> Track your learning, hold yourself accountable and stop procrastinating!
         </p>
       </div>
       <!-- Right Box -->
-      <div class="col-lg-6">
+      <div class="col-10 col-xl-6 p-3 main-color rounded">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <a class="nav-link active" id="sign-in-tab" data-bs-toggle="tab" href="#sign-in" role="tab"
@@ -50,10 +50,11 @@
               <input name="login_password" type="password" id="login_password" class="form-control"
                 placeholder="Password" required="">
               <div class="checkbox mb-3 mt-3">
-                <label>
+                <label class="text-white">
                   <input type="checkbox" value="remember-me"> Remember me
                 </label>
               </div>
+
               <button type="button" id="login" class="w-100 btn btn-lg btn-primary">Login</button>
             </form>
           </div>
@@ -72,14 +73,8 @@
                 placeholder="Password" required="">
               <label for="register_confirm_password" class="visually-hidden">Confirm Password</label>
               <input name="register_confirm_password" type="password" id="register_confirm_password"
-                class="form-control" placeholder="Confirm Password" required="">
-              <div class="checkbox mb-3 mt-3">
-                <label>
-                  <input type="checkbox" value="remember-me"> Remember me
-                </label>
-              </div>
-              <button type="button" id="signup" class="w-100 btn btn-lg btn-primary">Register</button>
-              <p class="mt-5 mb-3 text-muted">© 2017-2021</p>
+                class="form-control mt-3" placeholder="Confirm Password" required="">
+              <button type="button" id="signup" class="w-100 mt-3 btn btn-lg btn-primary">Register</button>
             </form>
           </div>
         </div>
@@ -89,22 +84,22 @@
   </div>
 
 
-  <footer class="fixed-bottom">
+  <footer class="fixed-bottom main-color">
     <ul class="nav d-flex justify-content-center mb-1">
       <li class="nav-item">
-        <a class="nav-link text-white" aria-current="page" href="#">Terms of Use</a>
+        <a class="nav-link text-main" aria-current="page" href="#">Terms of Use</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">Help</a>
+        <a class="nav-link text-main" href="#">Help</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">Cookies</a>
+        <a class="nav-link text-main" href="#">Cookies</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">Privacy</a>
+        <a class="nav-link text-main" href="#">Privacy</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">Contact</a>
+        <a class="nav-link text-main" href="#">Contact</a>
       </li>
     </ul>
   </footer>

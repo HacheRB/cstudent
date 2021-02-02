@@ -1,9 +1,34 @@
-body {
-  background-color: grey;
+:root{
+  --color-bg: #2C2F33;
+  --color-primary: #42464b;
+  --color-secondary:#C4C4C4;
+  --color-btn-primary: #7289DA;
+  --color-links: #1877F2;
+  --color-progress-bar: #2C2F33;
 }
-input {
-  display: block;
-  margin: 10px;
+
+/*
+index.html
+*/
+body {
+  background-color: #2C2F33;
+}
+
+footer{
+background: linear-gradient(180deg, rgba(44,47,51,1) 0%, rgba(66,70,75,0.5) 100%);
+}
+
+
+.h1,h1, #cstudent-title{
+font-size:calc(1.375rem + 3.5vw);
+}
+
+.text-main{
+  color: var(--color-secondary)
+}
+
+.main-color{
+  background-color: var(--color-primary);
 }
 
 .progress-card {
@@ -12,11 +37,27 @@ input {
   height:auto;
 }
 
-
 .prueba-tarjeta-progreso{
   display:inline-block;
   flex-direction:row;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #users-progress{
 background-color: purple;
