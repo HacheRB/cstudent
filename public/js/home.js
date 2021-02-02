@@ -1,5 +1,8 @@
+const components = require('./components')
 window.onload = () => {
 }
+
+const selectedCourse = null
 //Resource search
 document.getElementById('resource_search').addEventListener("click", function () {
   if (sessionStorage.getItem('userSearch')) {
@@ -10,19 +13,20 @@ document.getElementById('resource_search').addEventListener("click", function ()
       headers: { 'token': localStorage.token },
     })
     .then(response => {
-      sessionStorage.setItem('userSearch', response.data);
-      // console.log('search result ----------------------------------')
-      // console.log(response.data[0])
+      console.log(response.data[0])
       const searchResults = document.getElementById('search-results')
       searchResults.innerHTML = "";
-      console.log('sessionStorage ----------------------------------')
-      const sessionPrueba = JSON.parse(sessionStorage.getItem('userSearch'));
-      console.log(sessionPrueba)
-      console.log('sessionStorage ----------------------------------')
+
 
       response.data.forEach(course => {
-        const courseCard = showCourseSearchResult(course._id, "https://img-b.udemycdn.com/course/125_H/406784_e588_14.jpg?secure=uz7MLCb8IVlNlSoVMCRH9w%3D%3D%2C1612350369", course.title, course.visible_instructors[0].title, course.headline)
+        const courseCard = showCourseSearchResult(course.courseId, "https://img-b.udemycdn.com/course/125_H/406784_e588_14.jpg?secure=uz7MLCb8IVlNlSoVMCRH9w%3D%3D%2C1612350369", course.title, course.visible_instructors[0].title, course.headline)
         searchResults.innerHTML += courseCard;
+        console.log(course.courseId)
+        document.getElementById(`${course.courseId}`).addEventListener("click", function () {
+          console.log("clickeado")
+          selectedCourse = course;
+          searchResults.innerHTML = "";
+        })
       })
     })
     .catch(error => {
@@ -38,7 +42,8 @@ axios
   .then(response => {
     const coursesProgress = document.getElementById('users-progress');
     response.data.forEach(course => {
-      const courseCard = showCourseProgressCard(course._id, "https://img-b.udemycdn.com/course/125_H/406784_e588_14.jpg?secure=uz7MLCb8IVlNlSoVMCRH9w%3D%3D%2C1612350369", course.title, course.headline)
+      console.log(course)
+      const courseCard = showCourseProgressCard(course.material_id._id, course.material_id.image_240x135, course.material_id.title, course.material_id.headline, course.totalProgress)
       coursesProgress.innerHTML += courseCard;
     })
   })
@@ -65,7 +70,7 @@ function showMore(redirect) {
       </ul>`
 }
 
-function showCourseProgressCard(id, img, title, headline) {
+function showCourseProgressCard(id, img, title, headline, progress) {
   return `
       <div id="${id}" class="card progress-card m-2" style="width: 18rem;">
         <img src="${img}" class="card-img-top" alt="...">
@@ -74,7 +79,7 @@ function showCourseProgressCard(id, img, title, headline) {
             <p class="card-text">${headline}
             </p>
             <div class="progress">
-              <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: ${progress}%" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
       </div>
