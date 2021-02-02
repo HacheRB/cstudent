@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const courseProgressSchema = require('./courseProgress.model').schema
-const socialSchema = require('./social.model').schema
+const socialSchema = require('./social.model')
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -83,7 +83,44 @@ const userSchema = new mongoose.Schema({
     default: "",
     required: false
   },
-  socialLinks: socialSchema,
+  socialLinks: {
+    personal: {
+      type: String,
+      maxLength: 144,
+      trim: true,
+      default: "",
+    },
+    facebook: {
+      type: String,
+      maxLength: 144,
+      trim: true,
+      default: "",
+    },
+    instagram: {
+      type: String,
+      maxLength: 144,
+      trim: true,
+      default: "",
+    },
+    linkedin: {
+      type: String,
+      maxLength: 144,
+      trim: true,
+      default: "",
+    },
+    twitter: {
+      type: String,
+      maxLength: 144,
+      trim: true,
+      default: "",
+    },
+    github: {
+      type: String,
+      maxLength: 144,
+      trim: true,
+      default: ""
+    }
+  },
   coursesProgress: [courseProgressSchema]
 })
 

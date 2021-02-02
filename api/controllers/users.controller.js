@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/users.model')
 const utils = require('../utils/utils')
+const validator = require('validator');
 
 exports.getAllUsers = (req, res) => {
   User
@@ -27,37 +28,51 @@ exports.getUserCourses = (req, res) => {
     .catch(err => utils.handleError(err, res))
 }
 
+
+function getUserCoursesPublicData(coursesProgress) {
+  return coursesProgress.map(course => {
+    return {
+      material_id: course.material_id,
+      totalProgress: course.totalProgress,
+      status: course.status,
+      favorite: course.favorite
+    }
+  })
+}
+
 exports.getUserByUserName = (req, res) => {  //need to retrieve only some data
   User
-    .findOne({ userName: req.params.userName }) // not sure if params or body
-    .then(user => {
-      console.log("<<<<<<<")
-      console.log(user.avatar)
-      console.log("<<<<<<<")
-      res.status(200).json(user)
-      /*
-      {
-      avatar: user.avatar,
-      userName: user.userName,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      socialLinks: {
-        personal: user.socialLinks.personal,
-        facebook: user.socialLinks.facebook,
-        instagram: user.socialLinks.instagram,
-        linkedin: user.socialLinks.linkedin,
-        twitter: user.socialLinks.twitter,
-        github: user.socialLinks.github
-      },
-      location: {
-        city: user.location.city,
-        country: user.location.country
+    .findOne({ userName: req.params.userName })
+    .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
+    // not sure if params or body
+    .then(response => {
+      console.log(response)
+
+      const user = {
+        avatar: response.avatar,
+        userName: response.userName,
+        firstName: response.firstName,
+        lastName: response.lastName,
+        location: {
+          city: response.location.city, country: response.location.country
+        },
+        /*
+        socialLinks: {
+          personal: response.socialLinks.personal,
+          facebook: response.socialLinks.facebook,
+          instagram: response.socialLinks.instagram,
+          linkedin: response.socialLinks.linkedin,
+          twitter: response.socialLinks.twitter,
+          github: response.socialLinks.github
+        },*/
+        coursesProgress: getUserCoursesPublicData(response.coursesProgress)
       }
-    }*/
+      res.status(200).json(user)
     })
     .catch((err) => utils.handleError(err, res))
 }
 
+//esta ruta sobra 
 exports.getUserCoursesByUserName = (req, res) => {  //need to retrieve only some data
   User
     .findOne({ userName: req.params.userName })
@@ -83,7 +98,11 @@ exports.addCourseProgress = (req, res) => {
     .findById(res.locals.user._id)
     .then(userCourse => {
       userCourse.coursesProgress.push(req.body)
-      userCourse.save()
+      userCourse.save((function (err) {
+        if (err) throw err;
+        res.send('Course saved.');
+      })
+      )
     })
     .catch(err => utils.handleError(err, res))
 }
@@ -109,9 +128,28 @@ exports.updateCourseProgress = (req, res) => {
   console.log(res.locals.user._id)
   User
     .findById(res.locals.user._id)
-    .then(userCourse => {
-      userCourse.coursesProgress.push(req.body)
-      userCourse.save()
+    .then(user => {
+      console.log(user)
+      let index = user.coursesProgress.findIndex(x => x._id === req.query.params.id);
+      if (!req.body.initialDate === null && !req.body.initialDate === "") {
+        user.coursesProgress[index].initialDate = req.body.initialDate
+      }
+      if (!req.body.dailyEstimate === null && !req.body.dailyEstimate === "") {
+        user.coursesProgress[index].dailyEstimate = req.body.dailyEstimate
+      }
+      if (!req.body.totalProgress === null && !req.body.totalProgress === "") {
+        user.coursesProgress[index].totalProgress = req.body.totalProgress
+      }
+      if (!req.body.estimateDate === null && !req.body.estimateDate === "") {
+        user.coursesProgress[index].estimateDate = req.body.estimateDate
+      }
+      if (!req.body.status === null && !req.body.status === "") {
+        user.coursesProgress[index].status = req.body.status
+      }
+      if (!req.body.favorite === null && !req.body.favorite === "") {
+        user.coursesProgress[index].favorite = req.body.favorite
+      }
+      user.save()
     })
     .catch(err => utils.handleError(err, res))
 }
@@ -139,15 +177,21 @@ exports.deleteUserById = (req, res) => {
     .then(response => res.json(response))
     .catch(err => utils.handleError(err, res))
 }
-
+//Esto no va
 exports.deleteUserCourseById = (req, res) => {
   User
     .findById(res.locals.user._id)
     .then(user => {
+      console.log("1")
       const course = user.coursesProgress.id(req.params.id)
       console.log(course)
+
       course.remove()
-      user.save()
+      user.save((function (err) {
+        if (err) throw err;
+        res.send('Course deleted.');
+      }))
+
     })
     .catch(err => utils.handleError(err, res))
 }

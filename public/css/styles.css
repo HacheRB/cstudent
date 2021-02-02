@@ -11,6 +11,8 @@
 index.html
 */
 body {
+  height: 100vh;
+  width:100vw;
   background-color: #2C2F33;
 }
 
@@ -41,22 +43,6 @@ font-size:calc(1.375rem + 3.5vw);
   display:inline-block;
   flex-direction:row;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #users-progress{
