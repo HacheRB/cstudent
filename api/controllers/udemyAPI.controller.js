@@ -58,7 +58,8 @@ exports.getUdemyCoursesBySearchString2 = (req, res) => {
           created: course.created,
           description: course.description,
           headline: course.headline,
-          image_125_H: course.image_125_H,
+          image_240x135: course.image_240x135,
+          image_480x270: course.image_480x270,
           is_paid: course.is_paid,
           locale: course.locale,
           num_lectures: course.num_lectures,
@@ -75,3 +76,6 @@ exports.getUdemyCoursesBySearchString2 = (req, res) => {
     .catch(err => utils.handleError(err, res))
 }
 
+exports.getUdemyCourseById = (req, res) => {
+  console.log("hello")
+}

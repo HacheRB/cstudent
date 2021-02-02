@@ -28,7 +28,7 @@ document.getElementById('login').addEventListener("click", function () {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('email', response.data.email)
         localStorage.setItem('userNname', response.data.userName)
-        goEditProfile()
+        goHome()
       } else {
         alert('Email or Password Wrong!')
       }

@@ -29,7 +29,11 @@ const udemySchema = new mongoose.Schema({
     type: String,
     default: ""
   },
-  image_125_H: {
+  image_240x135: {
+    type: String,
+    default: ""
+  },
+  image_480x270: {
     type: String,
     default: ""
   },

@@ -12,7 +12,26 @@ input {
   height:auto;
 }
 
-.card-container{
-  display:inline-flex;
+
+.prueba-tarjeta-progreso{
+  display:inline-block;
   flex-direction:row;
+}
+
+#users-progress{
+background-color: purple;
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+}
+
+#course-status{
+  display:block;
+
+}
+
+#search-results{
+  display:inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
