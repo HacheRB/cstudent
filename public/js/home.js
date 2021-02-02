@@ -13,7 +13,8 @@ window.onload = () => {
         console.log(response.data[0])
         const searchResults = document.getElementById('search-results')
         searchResults.innerHTML = "";
-        response.data.forEach(course => {
+        const slicedArray = response.data.slice(0, 4)
+        slicedArray.forEach(course => {
           let courseCard = document.createElement('div')
           const courseCardFunc = showCourseSearchResult(course.courseId, course.image_240x135, course.title, course.visible_instructors[0].title, course.headline)
           courseCard.innerHTML = (courseCardFunc)

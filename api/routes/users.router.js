@@ -4,9 +4,7 @@ const middleware = require('../utils/middleware');
 
 router.get('/', middleware.authUser, middleware.isAdmin, userController.getAllUsers)
 router.get('/me', middleware.authUser, userController.getUserProfile)
-router.get('/me/courses', middleware.authUser, userController.getUserCourses)
 router.get('/:userName', userController.getUserByUserName)
-router.get('/:userName/courses', userController.getUserCoursesByUserName)
 
 router.post('/me/courses', middleware.authUser, userController.addCourseProgress) //Create course in user
 

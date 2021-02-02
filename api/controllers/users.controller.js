@@ -11,23 +11,16 @@ exports.getAllUsers = (req, res) => {
 }
 
 exports.getUserProfile = (req, res) => {
-  res.send(res.locals.user)
-
-}
-
-exports.getUserCourses = (req, res) => {
   console.log(res.locals.user._id)
   User
     .findById(res.locals.user._id)
     .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
-
     .then(user => {
       console.log(user)
-      res.json(user.coursesProgress)
+      res.json(user)
     })
     .catch(err => utils.handleError(err, res))
 }
-
 
 function getUserCoursesPublicData(coursesProgress) {
   return coursesProgress.map(course => {
@@ -46,8 +39,6 @@ exports.getUserByUserName = (req, res) => {  //need to retrieve only some data
     .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
     // not sure if params or body
     .then(response => {
-      console.log(response)
-
       const user = {
         avatar: response.avatar,
         userName: response.userName,
@@ -56,7 +47,6 @@ exports.getUserByUserName = (req, res) => {  //need to retrieve only some data
         location: {
           city: response.location.city, country: response.location.country
         },
-        /*
         socialLinks: {
           personal: response.socialLinks.personal,
           facebook: response.socialLinks.facebook,
@@ -64,32 +54,11 @@ exports.getUserByUserName = (req, res) => {  //need to retrieve only some data
           linkedin: response.socialLinks.linkedin,
           twitter: response.socialLinks.twitter,
           github: response.socialLinks.github
-        },*/
+        },
         coursesProgress: getUserCoursesPublicData(response.coursesProgress)
       }
       res.status(200).json(user)
     })
-    .catch((err) => utils.handleError(err, res))
-}
-
-//esta ruta sobra 
-exports.getUserCoursesByUserName = (req, res) => {  //need to retrieve only some data
-  User
-    .findOne({ userName: req.params.userName })
-    // not sure if params or body
-    .then(userCourses => {
-      console.log(userCourses)
-      res.json(userCourses)
-      /*
-      {
-      source: userCourses.coursesProgress.source,
-      material_id: userCourses.coursesProgress.material_id,
-      initialDate: userCourses.coursesProgress.initialDate,
-      totalProgress: userCourses.coursesProgress.totalProgress,
-      status: userCourses.coursesProgress.status,
-      favorite: userCourses.coursesProgress.favorite
-    }*/
-    }) //solo devolver algunos datos
     .catch((err) => utils.handleError(err, res))
 }
 
@@ -177,7 +146,7 @@ exports.deleteUserById = (req, res) => {
     .then(response => res.json(response))
     .catch(err => utils.handleError(err, res))
 }
-//Esto no va
+
 exports.deleteUserCourseById = (req, res) => {
   User
     .findById(res.locals.user._id)
