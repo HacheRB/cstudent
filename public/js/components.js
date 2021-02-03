@@ -1,3 +1,9 @@
+export function addComponent(fatherId, childObj) {
+  const father = document.getElementById(fatherId)
+  father.innerHTML = ""
+  father.innerHTML = childObj
+}
+
 export function addCourseStatus(status) {
   return `<h2>${status}</h2>
   `
@@ -40,14 +46,43 @@ export function showCourseProgressCard(id, img, title, headline, progress) {
   `
 }
 
-export function addComponent(fatherId, childObj) {
-  const father = document.getElementById(fatherId)
-  father.innerHTML = ""
-  father.innerHTML = childObj
+
+/* Add to HTML:
+<div id="search-bar" class="container-lg search-container rounded mt-4"></div>
+*/
+export function addCourseSearch() {
+  return `    
+      <label for="user_udemy_search">
+        <h5 class=" mt-3 mx-3">Add new resources.</h5>
+      </label>
+      <div class="input-group p-3">
+        <span class="input-group-text" id="basic-addon3"><b>Udemy</b></span>
+        <input type="text" class="form-control" id="user_udemy_search" name="user_udemy_search"
+          aria-describedby="basic-addon3">
+          <button type="button" class="btn btn-primary" id="resource_search">Add Resource</button>
+        </div></div>`
 }
 
-/* Add<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-dark">
-</nav> to HTML
+export function addCourseForm(courseObj) {
+  return `
+  <div class=" d-flex justify-content-left" id="course-info">${courseObj.title} - ${courseObj.headline} </div>
+        <form class="row g-3">
+          <div class="col-md-4">
+            <label for="input-starting-date" class="form-label">Starting Date</label>
+            <input type="date" class="form-control" id="input-starting-date">
+          </div>
+          <div class="col-md-4">
+            <label for="input-daily-progress" class="form-label">Daily Progress(hours)</label>
+            <input type="string" class="form-control" id="input-daily-progress">
+          </div>
+          <div class="col-md-4 d-flex align-items-end">
+            <button type="button" id="add-course-form" class="btn btn-primary">Add Course</button>
+          </div>
+        </form>`
+}
+
+/* Add to HTML: 
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-dark"></nav> 
 */
 export function navBar() {
   return `
@@ -85,11 +120,12 @@ export function navBar() {
         </li>
         <!-- /OPTIONS -->
       </ul>
-    </div>  
-    `
+    </div>`
 }
 
-// Add <footer id="footer"></footer> to HTML
+/* Add to HTML:
+<footer id="footer"></footer>
+*/
 export function footer() {
   return `  
   <!-- FOOTER -->
@@ -110,6 +146,5 @@ export function footer() {
         <a class="nav-link text-white" href="#">Contact</a>
       </li>
     </ul>
-  <!-- /FOOTER -->
-  `
+  <!-- /FOOTER -->`
 }

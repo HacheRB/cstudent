@@ -1,9 +1,12 @@
-import { goEditProfile, goHome, logOut } from "./utils.js";
-import { addComponent, footer, navBar, showCourseProgressCard, showCourseSearchResult } from "./components.js";
+import { checkIfUserHasCourse, escapeChars, goEditProfile, goHome, logOut, printCourses, searchUdemyCourses } from "./utils.js";
+import { addComponent, addCourseSearch, footer, navBar, addCourseForm, showCourseProgressCard, showCourseSearchResult } from "./components.js";
 
 window.onload = () => {
+  let selectedCourse = null
   addComponent('navbar', navBar())
+  addComponent('search-bar', addCourseSearch())
   addComponent('footer', footer())
+
   //Username in navbar
   const userName = (localStorage.getItem('userName'))
   const loggedUser = document.getElementById('loggedUser')
@@ -18,31 +21,46 @@ window.onload = () => {
   })
   document.getElementById('logout').addEventListener("click", logOut)
 
-  let selectedCourse = null
-
   //Resource search
   document.getElementById('resource_search').addEventListener("click", function () {
+    let userSearch = escapeChars(document.getElementById('user_udemy_search').value)
     axios
-      .get(`http://localhost:3000/api/udemyAPI?userSearch=${document.getElementById('user_udemy_search').value}`, {
+      .get(`http://localhost:3000/api/udemyAPI?userSearch=${userSearch}`, {
         headers: { 'token': localStorage.token },
       })
       .then(response => {
+        //Recorto las busquedas devueltas
         console.log(response.data[0])
         const searchResults = document.getElementById('search-results')
+        const courseForm = document.getElementById('add-course-form')
         searchResults.innerHTML = "";
+        courseForm.innerHTML = "";
         const slicedArray = response.data.slice(0, 4)
+        //For each que imprime las tarjetas y  añade los eventlistener para cada una.
         slicedArray.forEach(course => {
           let courseCard = document.createElement('div')
           const courseCardFunc = showCourseSearchResult(course.courseId, course.image_240x135, course.title, course.visible_instructors[0].title, course.headline)
           courseCard.innerHTML = (courseCardFunc)
-          console.log(courseCard)
           searchResults.appendChild(courseCard)
-          console.log(searchResults)
+          //event listener de cada tarjeta
           document.getElementById(`${course.courseId}`).addEventListener("click", function () {
             console.log("clickeado")
             selectedCourse = course;
             console.log(selectedCourse)
+            /*
+            console.log(checkIfUserHasCourse(selectedCourse.courseId))
+            if (checkIfUserHasCourse(selectedCourse)) {
+              console.log("holaaaaa")
+            }
+*/
             searchResults.innerHTML = "";
+            courseForm.innerHTML = "";
+            //formulario del curso
+            addComponent(`add-course-form`, addCourseForm(selectedCourse))
+            //event listener del curso
+            document.getElementById(`add-course-form`).addEventListener("click", function () {
+            })
+
           })
         })
       })
@@ -50,21 +68,18 @@ window.onload = () => {
         console.error(error)
       });
   })
-
-  // GET USER Courses - need to improve
-  axios
-    .get('http://localhost:3000/api/users/me/', { headers: { token: localStorage.getItem('token') } })
-    .then(response => {
-      console.log(response)
-      const coursesProgress = document.getElementById('users-progress');
-      response.data.coursesProgress.forEach(course => {
-        const courseCard = showCourseProgressCard(course.material_id._id, course.material_id.image_240x135, course.material_id.title, course.material_id.headline, course.totalProgress)
-        coursesProgress.innerHTML += courseCard;
-      })
-    })
-
 }
 
 
 
 
+
+// GET USER Courses - need to improve
+axios
+  .get('http://localhost:3000/api/users/me/', { headers: { token: localStorage.getItem('token') } })
+  .then(response => {
+    printCourses('users-progress', response)
+  })
+  .catch(error => {
+    console.error(error)
+  })

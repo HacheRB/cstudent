@@ -1,8 +1,9 @@
 :root{
   --color-bg: #2C2F33;
-  --color-primary: #42464b;
+  --color-primary: #36393d;
   --color-secondary:#C4C4C4;
   --color-btn-primary: #7289DA;
+  --color-btn-primary-darker: #aab8e9;
   --color-links: #1877F2;
   --color-progress-bar: #2C2F33;
 }
@@ -11,15 +12,7 @@ body {
   height: 100vh;
   width:100vw;
   background-color: #2C2F33;
-}
-
-#page-container {
-  position: relative;
-  min-height: 100vh;
-}
-
-#content-wrap {
-  padding-bottom: 2.5rem;    /* Footer height */
+  color: var(--color-secondary)
 }
 
 footer{
@@ -28,14 +21,8 @@ background: linear-gradient(180deg, rgba(44,47,51,1) 0%, rgba(66,70,75,0.5) 100%
   bottom: 0;
   width: 100%;         
 }
-
-
 .h1,h1, #cstudent-title{
-font-size:calc(1.375rem + 3.5vw);
-}
-
-.text-main{
-  color: var(--color-secondary)
+font-size:calc(1.375rem + 3.5vw);;
 }
 
 .main-color{
@@ -53,16 +40,25 @@ font-size:calc(1.375rem + 3.5vw);
   flex-direction:row;
 }
 
+.text-main{
+  color: var(--color-secondary)
+}
 
-#users-progress{
-background-color: purple;
-display:flex;
-flex-direction:row;
-flex-wrap:wrap;
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
 }
 
 #course-status{
   display:block;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#search-bar, #users-progress{
+  background-color: var(--color-primary);
 
 }
 
@@ -70,4 +66,10 @@ flex-wrap:wrap;
   display:inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+#users-progress{
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
 }

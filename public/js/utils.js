@@ -1,3 +1,5 @@
+import { showCourseProgressCard, showCourseSearchResult } from "./components.js";
+
 //REDIRECT FUNCTIONS
 
 export function goHome() {
@@ -12,10 +14,57 @@ export function logOut() {
   window.location.assign("http://localhost:3000")
 }
 
+export function escapeChars(str) {
+  return (encodeURIComponent(str.trim()));
+}
+
 export function emptyStringToUndefined(field) {
   if (field === "" || field === null) {
     return undefined
   } return field
+}
+
+//No funciona
+export function searchUdemyCourses(elementId, response, results) {
+  let courseVar = "prueba"
+  let searchResults = document.getElementById(elementId)
+  searchResults.innerHTML = "";
+  let slicedArray = response.data.slice(0, (results))
+  slicedArray.forEach(course => {
+    let courseCard = document.createElement('div')
+    let courseCardFunc = showCourseSearchResult(course.courseId, course.image_240x135, course.title, course.visible_instructors[0].title, course.headline)
+    courseCard.innerHTML = (courseCardFunc)
+    console.log(courseCard)
+    searchResults.appendChild(courseCard)
+    document.getElementById(`${course.courseId}`).addEventListener("click", function () {
+      courseVar = course;
+      searchResults.innerHTML = "";
+    })
+  })
+  return courseVar
+}
+
+export function checkIfUserHasCourse(id) {
+  axios
+    .get(`http://localhost:3000/api/users/me`, {
+      headers: { 'token': localStorage.token },
+    }).then(response => {
+      const courseExists = response.data.coursesProgress.some(obj => {
+        return obj.material_id.courseId === id
+      })
+      return courseExists
+    }).catch(error => {
+      console.error(error)
+    })
+}
+
+export function printCourses(elementId, response) {
+  let coursesProgress = document.getElementById(elementId);
+
+  response.data.coursesProgress.forEach(course => {
+    let courseCard = showCourseProgressCard(course.material_id._id, course.material_id.image_240x135, course.material_id.title, course.material_id.headline, course.totalProgress)
+    coursesProgress.innerHTML += courseCard;
+  })
 }
 
 function checkIfCourseExists(obj) {

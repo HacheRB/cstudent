@@ -5,6 +5,6 @@ const middleware = require('../utils/middleware');
 //Maybe add a route to filter courses
 
 router.get('/', middleware.authUser, udemyAPIController.getUdemyCoursesBySearchString2)
-router.get('/:id', middleware.authUser, udemyAPIController.getUdemyCourseById)
+router.get('/course', middleware.authUser, udemyAPIController.getUdemyCourseById)
 
 module.exports = router
