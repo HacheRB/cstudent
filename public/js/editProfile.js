@@ -1,24 +1,32 @@
+import { emptyStringToUndefined, goEditProfile, goHome, logOut } from "./utils.js";
+import { addComponent, footer, navBar } from "./components.js";
+
 window.onload = () => {
+  addComponent('navbar', navBar())
+  addComponent('footer', footer())
   //Username in navbar
   const userName = (localStorage.getItem('userName'))
   const loggedUser = document.getElementById('loggedUser')
   loggedUser.innerHTML = `Logged in as ${userName} `
+  //Home redirect
+  document.getElementById('home-bt').addEventListener("click", function () {
+    goHome()
+  })
   //Edit Profile redirect
   document.getElementById('editProfile').addEventListener("click", function () {
     goEditProfile()
   })
+  document.getElementById('logout').addEventListener("click", logOut)
 }
 
 document.getElementById('update-password-btn').addEventListener("click", function () {
   console.log("hola click")
   const newPassword1 = document.getElementById('new-password-1').value
   const newPassword2 = document.getElementById('new-password-1').value
-
   if (newPassword1 === newPassword2) {
     console.log("entra en el if password")
     console.log(localStorage.getItem('token'))
     console.log(document.getElementById('new-password-1').value)
-
     axios
       .put('http://localhost:3000/api/users/me/password', { password: document.getElementById('new-password-1').value }, {
         headers: { token: localStorage.getItem('token') },
@@ -35,14 +43,7 @@ document.getElementById('update-password-btn').addEventListener("click", functio
     alert(`New Password doesn't match`)
   }
 })
-
-
-function emptyStringToUndefined(field) {
-  if (field === "" || field === null) {
-    return undefined
-  } return field
-}
-
+//No Funciona
 document.getElementById('update-profile-btn').addEventListener("click", function () {
   console.log("update profile")
   const data = {
@@ -78,15 +79,5 @@ document.getElementById('update-profile-btn').addEventListener("click", function
     })
 }
 )
-document.getElementById('logout').addEventListener("click", function () {
-  localStorage.clear();
-  window.location.assign("http://localhost:3000")
-})
 
 
-
-//FUNCIONES REPETIDAS ? 
-
-function goEditProfile() {
-  window.location = "http://localhost:3000/editProfile.html"
-}

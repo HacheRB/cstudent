@@ -1,3 +1,10 @@
+import { goHome, goEditProfile } from "./utils.js";
+import { addComponent, footer } from "./components.js";
+
+window.onload = () => {
+  addComponent('footer', footer())
+}
+
 document.getElementById('signup').addEventListener("click", function () {
   console.log("primera entrada")
   axios.post('http://localhost:3000/api/auth/register', {
@@ -37,10 +44,3 @@ document.getElementById('login').addEventListener("click", function () {
       alert('Email or Password Wrong!')
     });
 })
-
-function goHome() {
-  window.location = "http://localhost:3000/home.html"
-}
-function goEditProfile() {
-  window.location = "http://localhost:3000/editProfile.html"
-}
