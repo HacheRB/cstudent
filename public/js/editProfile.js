@@ -1,3 +1,14 @@
+window.onload = () => {
+  //Username in navbar
+  const userName = (localStorage.getItem('userName'))
+  const loggedUser = document.getElementById('loggedUser')
+  loggedUser.innerHTML = `Logged in as ${userName} `
+  //Edit Profile redirect
+  document.getElementById('editProfile').addEventListener("click", function () {
+    goEditProfile()
+  })
+}
+
 document.getElementById('update-password-btn').addEventListener("click", function () {
   console.log("hola click")
   const newPassword1 = document.getElementById('new-password-1').value
@@ -26,33 +37,39 @@ document.getElementById('update-password-btn').addEventListener("click", functio
 })
 
 
+function emptyStringToUndefined(field) {
+  if (field === "" || field === null) {
+    return undefined
+  } return field
+}
+
 document.getElementById('update-profile-btn').addEventListener("click", function () {
   console.log("update profile")
   const data = {
-    email: document.getElementById('update-email').value,
-    firstName: document.getElementById('update-first-name').value,
-    lastName: document.getElementById('update-last-name').value,
-    birthDate: document.getElementById('update-birthdate').value,
+    email: emptyStringToUndefined(document.getElementById('update-email').value),
+    firstName: emptyStringToUndefined(document.getElementById('update-first-name').value),
+    lastName: emptyStringToUndefined(document.getElementById('update-last-name').value),
+    birthDate: emptyStringToUndefined(document.getElementById('update-birthdate').value),
     location: {
-      country: document.getElementById('update-country').value,
-      city: document.getElementById('update-city').value
+      country: emptyStringToUndefined(document.getElementById('update-country').value),
+      city: emptyStringToUndefined(document.getElementById('update-city').value)
     },
     socialLinks: {
-      personal: document.getElementById('social-personal').value,
-      facebook: document.getElementById('social-facebook').value,
-      instagram: document.getElementById('social-instagram').value,
-      linkedin: document.getElementById('social-linkedin').value,
-      twitter: document.getElementById('social-twitter').value,
-      github: document.getElementById('social-github').value
+      personal: emptyStringToUndefined(document.getElementById('social-personal').value),
+      facebook: emptyStringToUndefined(document.getElementById('social-facebook').value),
+      instagram: emptyStringToUndefined(document.getElementById('social-instagram').value),
+      linkedin: emptyStringToUndefined(document.getElementById('social-linkedin').value),
+      twitter: emptyStringToUndefined(document.getElementById('social-twitter').value),
+      github: emptyStringToUndefined(document.getElementById('social-github').value)
     }
   }
-  console.log(localStorage.getItem('token'))
   console.log(data)
   axios
     .put('http://localhost:3000/api/users/me/', data, {
       headers: { token: localStorage.getItem('token') },
     })
     .then(response => {
+      console.log(response)
       alert(response.data)
     })
     .catch(error => {
@@ -67,3 +84,9 @@ document.getElementById('logout').addEventListener("click", function () {
 })
 
 
+
+//FUNCIONES REPETIDAS ? 
+
+function goEditProfile() {
+  window.location = "http://localhost:3000/editProfile.html"
+}

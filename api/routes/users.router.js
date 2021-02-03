@@ -16,3 +16,5 @@ router.delete('/me', middleware.authUser, userController.deleteUserById)
 router.delete('/me/courses/:id', middleware.authUser, userController.deleteUserCourseById)
 
 module.exports = router
+
+//add daily, edit daily routes ?

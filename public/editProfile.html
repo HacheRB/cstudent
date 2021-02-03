@@ -18,14 +18,61 @@
 </head>
 
 <body>
-  <div class="logout-container">
-    <button id='logout'>logout</button>
-  </div>
 
 
-  <div class="password-container d-flex justify-content-center p-3">
-    <form class="row mb-6">
-      <!-- PENDING ACTUAL PASSWORD CHECK
+
+  <!-- PAGE CONTAINER -->
+  <div id="page-container">
+    <!-- CONTENT WRAP -->
+    <div id="content-wrap">
+      <!-- /PAGE CONTAINER -->
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="container-fluid ">
+          <a class="navbar-brand text-white px-3" href="#">CStudent</a>
+          <ul class="navbar-nav d-flex justify-content-end flex-row pe-3">
+            <a class="nav-link active text-white pe-4" aria-current="page" href="#">Tracker</a>
+            <!-- PROFILE -->
+            <a class="nav-link text-white pe-4" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                <path fill-rule="evenodd"
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+              </svg></a>
+            <!-- /PROFILE -->
+            <!-- /OPTIONS -->
+            <li class="nav-item dropdown pe-4">
+              <a class="nav-link dropdown-toggle text-white " href="#" id="navbarDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-gear-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                </svg>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" id="loggedUser" href="#">Logged in as userName</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" id="editProfile" href="#">Edit Profile</a></li>
+                <li><a class="dropdown-item" id="logout" href="#">Log out</a></li>
+              </ul>
+            </li>
+            <!-- /OPTIONS -->
+          </ul>
+        </div>
+      </nav>
+      <!-- /NAVBAR -->
+
+
+
+
+
+      <div class="password-container d-flex justify-content-center p-3">
+        <form class="row mb-6">
+          <!-- PENDING ACTUAL PASSWORD CHECK
       <div class="row mb-6">
         <label for="actual-password" class="col-sm-2 col-form-label">Actual Password</label>
         <div class="col-sm-10">
@@ -33,112 +80,156 @@
         </div>
       </div>
 -->
-      <div class="row mb-3">
-        <label for="new-password-1" class="col-sm-2 col-form-label">New Password</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" id="new-password-1">
-        </div>
+          <div class="row mb-3">
+            <label for="new-password-1" class="col-sm-2 col-form-label">New Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="new-password-1">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="new-password-2" class="col-sm-2 col-form-label">Confirm New Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="new-password-2">
+            </div>
+          </div>
+          <div class="d-flex justify-content-end row mb-3">
+            <button type="button" class="btn btn-primary col-sm-3" id="update-password-btn"> Update Password</button>
+          </div>
+        </form>
       </div>
-      <div class="row mb-3">
-        <label for="new-password-2" class="col-sm-2 col-form-label">Confirm New Password</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" id="new-password-2">
-        </div>
+
+      <div class=" profile-container d-flex justify-content-center p-3">
+        <form class="row mb-6">
+          <div class="row mb-6">
+            <label for="update-email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="update-email">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="update-first-name" class="col-sm-2 col-form-label">First name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="update-first-name">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="update-last-name" class="col-sm-2 col-form-label">Last name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="update-last-name">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="update-country" class="col-sm-2 col-form-label">Country</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="update-country">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="update-city" class="col-sm-2 col-form-label">City</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="update-city">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="update-birthdate" class="col-sm-2 col-form-label">Birthdate</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="update-birthdate">
+            </div>
+          </div>
+
+          <h1>SOCIAL</h1>
+          <div class="row mb-3">
+            <label for="social-personal" class="col-sm-2 col-form-label">Personal</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="social-personal">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="social-facebook" class="col-sm-2 col-form-label">Facebook</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="social-facebook">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="social-instagram" class="col-sm-2 col-form-label">Instagram</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="social-instagram">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="social-linkedin" class="col-sm-2 col-form-label">Linkedin</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="social-linkedin">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="social-twitter" class="col-sm-2 col-form-label">Twitter</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="social-twitter">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="social-github" class="col-sm-2 col-form-label">GitHub</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="social-github">
+            </div>
+          </div>
+          <div class="d-flex justify-content-end row mb-3">
+            <button type="button" class="btn btn-primary col-sm-3" id="update-profile-btn">Update Profile</button>
+          </div>
+        </form>
       </div>
-      <div class="d-flex justify-content-end row mb-3">
-        <button type="button" class="btn btn-primary col-sm-3" id="update-password-btn"> Update Password</button>
-      </div>
-    </form>
+
+    </div>
+    <!-- /CONTENT WRAP -->
+    <!-- FOOTER -->
+    <footer id="footer">
+      <ul class="nav d-flex justify-content-center mb-1">
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-current="page" href="#">Terms of Use</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Help</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Cookies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Privacy</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Contact</a>
+        </li>
+      </ul>
+    </footer>
+    <!-- /FOOTER -->
+
   </div>
 
-  <div class=" profile-container d-flex justify-content-center p-3">
-    <form class="row mb-6">
-      <div class="row mb-6">
-        <label for="update-email" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-          <input type="email" class="form-control" id="update-email">
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label for="update-first-name" class="col-sm-2 col-form-label">First name</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="update-first-name">
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label for="update-last-name" class="col-sm-2 col-form-label">Last name</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="update-last-name">
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label for="update-country" class="col-sm-2 col-form-label">Country</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="update-country">
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label for="update-city" class="col-sm-2 col-form-label">City</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="update-city">
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label for="update-birthdate" class="col-sm-2 col-form-label">Birthdate</label>
-        <div class="col-sm-10">
-          <input type="date" class="form-control" id="update-birthdate">
-        </div>
-      </div>
-
-      <h1>SOCIAL</h1>
-      <div class="row mb-3">
-        <label for="social-personal" class="col-sm-2 col-form-label">Personal</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="social-personal">
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label for="social-facebook" class="col-sm-2 col-form-label">Facebook</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="social-facebook">
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label for="social-instagram" class="col-sm-2 col-form-label">Instagram</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="social-instagram">
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label for="social-linkedin" class="col-sm-2 col-form-label">Linkedin</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="social-linkedin">
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label for="social-twitter" class="col-sm-2 col-form-label">Twitter</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="social-twitter">
-        </div>
-      </div>
-      <div class="row mb-3">
-        <label for="social-github" class="col-sm-2 col-form-label">GitHub</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="social-github">
-        </div>
-      </div>
-      <div class="d-flex justify-content-end row mb-3">
-        <button type="button" class="btn btn-primary col-sm-3" id="update-profile-btn">Update Profile</button>
-      </div>
-    </form>
-  </div>
 
 
+  <!-- FOOTER -->
+  <footer class="footer-container">
+    <ul class="nav d-flex justify-content-center mb-1">
+      <li class="nav-item">
+        <a class="nav-link text-white" aria-current="page" href="#">Terms of Use</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Help</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Cookies</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Privacy</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Contact</a>
+      </li>
+    </ul>
+  </footer>
+  <!-- /FOOTER -->
 
-
-  <!-- -->
-  <!-- -->
-  <!-- -->
   <script src=" js/editProfile.js"></script>
 </body>
 

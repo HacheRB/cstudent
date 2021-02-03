@@ -16,97 +16,108 @@
 </head>
 
 <body>
-  <!-- Main Container -->
-  <div class="container-xxl w-100 h-100">
-    <div class="row  w-auto h-auto d-xl-flex justify-content-center">
-      <!-- Left Box -->
-      <div class=" col-10 col-xl-6 rounded d-flex flex-column justify-content-center align-items-center">
-        <h1 class="text-main" id="cstudent-title">CStudent</h1>
-        <p class="text-main text-center"> Track your learning, hold yourself accountable and stop procrastinating!
-        </p>
-      </div>
-      <!-- Right Box -->
-      <div class="col-10 col-xl-6 p-3 main-color rounded">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="sign-in-tab" data-bs-toggle="tab" href="#sign-in" role="tab"
-              aria-controls="sign-in" aria-selected="true">Sign In</a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" id="register-tab" data-bs-toggle="tab" href="#register" role="tab"
-              aria-controls="register" aria-selected="false">Register</a>
-          </li>
-        </ul>
-        <!-- tab content -->
-        <div class="tab-content" id="myTabContent">
-          <!-- Sign In tab content -->
-          <div class="tab-pane fade show active mt-5" id="sign-in" role="tabpanel" aria-labelledby="sign-in-tab">
-            <!-- Sign In form -->
-            <form>
-              <label for="login_email" class="visually-hidden">Email address</label>
-              <input name="login_email" type="email" id="login_email" class="form-control mb-3"
-                placeholder="Email address" required="" autofocus="">
-              <label for="login_password" class="visually-hidden">Password</label>
-              <input name="login_password" type="password" id="login_password" class="form-control"
-                placeholder="Password" required="">
-              <div class="checkbox mb-3 mt-3">
-                <label class="text-white">
-                  <input type="checkbox" value="remember-me"> Remember me
-                </label>
-              </div>
 
-              <button type="button" id="login" class="w-100 btn btn-lg btn-primary">Login</button>
-            </form>
+  <!-- PAGE CONTAINER -->
+  <div id="page-container">
+    <!-- CONTENT WRAP -->
+    <div id="content-wrap">
+
+      <!-- Main Container -->
+      <div class="container-xxl w-100 h-100">
+        <div class="row  w-auto h-auto d-xl-flex justify-content-center">
+          <!-- Left Box -->
+          <div class=" col-10 col-xl-6 rounded d-flex flex-column justify-content-center align-items-center">
+            <h1 class="text-main" id="cstudent-title">CStudent</h1>
+            <p class="text-main text-center"> Track your learning, hold yourself accountable and stop procrastinating!
+            </p>
           </div>
-          <!-- Register tab content -->
-          <div class="tab-pane fade mt-5" id="register" role="tabpanel" aria-labelledby="register-tab">
-            <!-- Register In form -->
-            <form>
-              <label for="signup_name" class="visually-hidden">Username</label>
-              <input name="signup_name" type="text" id="signup_name" class="form-control mb-3" placeholder="Username"
-                required="" autofocus="">
-              <label for="signup_email" class="visually-hidden">Email address</label>
-              <input name="signup_email" type="email" id="signup_email" class="form-control mb-3"
-                placeholder="Email address" required="" autofocus="">
-              <label for="signup_password" class="visually-hidden">Password</label>
-              <input name="signup_password" type="password" id="signup_password" class="form-control"
-                placeholder="Password" required="">
-              <label for="register_confirm_password" class="visually-hidden">Confirm Password</label>
-              <input name="register_confirm_password" type="password" id="register_confirm_password"
-                class="form-control mt-3" placeholder="Confirm Password" required="">
-              <button type="button" id="signup" class="w-100 mt-3 btn btn-lg btn-primary">Register</button>
-            </form>
+          <!-- Right Box -->
+          <div class="col-10 col-xl-6 p-3 main-color rounded">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="sign-in-tab" data-bs-toggle="tab" href="#sign-in" role="tab"
+                  aria-controls="sign-in" aria-selected="true">Sign In</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="register-tab" data-bs-toggle="tab" href="#register" role="tab"
+                  aria-controls="register" aria-selected="false">Register</a>
+              </li>
+            </ul>
+            <!-- tab content -->
+            <div class="tab-content" id="myTabContent">
+              <!-- Sign In tab content -->
+              <div class="tab-pane fade show active mt-5" id="sign-in" role="tabpanel" aria-labelledby="sign-in-tab">
+                <!-- Sign In form -->
+                <form>
+                  <label for="login_email" class="visually-hidden">Email address</label>
+                  <input name="login_email" type="email" id="login_email" class="form-control mb-3"
+                    placeholder="Email address" required="" autofocus="">
+                  <label for="login_password" class="visually-hidden">Password</label>
+                  <input name="login_password" type="password" id="login_password" class="form-control"
+                    placeholder="Password" required="">
+                  <div class="checkbox mb-3 mt-3">
+                    <label class="text-white">
+                      <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                  </div>
+
+                  <button type="button" id="login" class="w-100 btn btn-lg btn-primary">Login</button>
+                </form>
+              </div>
+              <!-- Register tab content -->
+              <div class="tab-pane fade mt-5" id="register" role="tabpanel" aria-labelledby="register-tab">
+                <!-- Register In form -->
+                <form>
+                  <label for="signup_name" class="visually-hidden">Username</label>
+                  <input name="signup_name" type="text" id="signup_name" class="form-control mb-3"
+                    placeholder="Username" required="" autofocus="">
+                  <label for="signup_email" class="visually-hidden">Email address</label>
+                  <input name="signup_email" type="email" id="signup_email" class="form-control mb-3"
+                    placeholder="Email address" required="" autofocus="">
+                  <label for="signup_password" class="visually-hidden">Password</label>
+                  <input name="signup_password" type="password" id="signup_password" class="form-control"
+                    placeholder="Password" required="">
+                  <label for="register_confirm_password" class="visually-hidden">Confirm Password</label>
+                  <input name="register_confirm_password" type="password" id="register_confirm_password"
+                    class="form-control mt-3" placeholder="Confirm Password" required="">
+                  <button type="button" id="signup" class="w-100 mt-3 btn btn-lg btn-primary">Register</button>
+                </form>
+              </div>
+            </div>
           </div>
+          <!--End of Main Row -->
         </div>
       </div>
-      <!--End of Main Row -->
+
     </div>
+    <!-- /CONTENT WRAP -->
+
+    <!-- FOOTER -->
+    <footer id="footer">
+      <ul class="nav d-flex justify-content-center mb-1">
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-current="page" href="#">Terms of Use</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Help</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Cookies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Privacy</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Contact</a>
+        </li>
+      </ul>
+    </footer>
+    <!-- /FOOTER -->
+
   </div>
+  <!-- /PAGE CONTAINER -->
 
 
-  <footer class="fixed-bottom main-color">
-    <ul class="nav d-flex justify-content-center mb-1">
-      <li class="nav-item">
-        <a class="nav-link text-main" aria-current="page" href="#">Terms of Use</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-main" href="#">Help</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-main" href="#">Cookies</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-main" href="#">Privacy</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-main" href="#">Contact</a>
-      </li>
-    </ul>
-  </footer>
-
-
-  <!-- -->
-  <!-- -->
   <!-- -->
   <script src="js/script.js"></script>
 

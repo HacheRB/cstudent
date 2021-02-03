@@ -98,6 +98,3 @@ function showCourseProgressCard(obj) {
   `
 
 }
-
-
-export { checkIfCourseExists, addUdemyCourse, showCourseCard, showCourseProgressCard }

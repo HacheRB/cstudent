@@ -13,7 +13,6 @@ exports.authUser = (req, res, next) => {
         .findOne({ email: token.email })
         .then(user => {
           res.locals.user = user
-          console.log("authMiddleware pasado")
           next()
         })
         .catch(err => res.json(err))

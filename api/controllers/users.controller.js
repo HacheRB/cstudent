@@ -84,7 +84,8 @@ exports.updateUser = (req, res) => {
   User
     .findByIdAndUpdate(res.locals.user.id, req.body, {
       new: true,
-      runValidators: true
+      runValidators: true,
+      omitUndefined: true
     })
     .then(user => {
       res.send(`Congratulations ${user.userName}, your profile was updated`)
@@ -122,9 +123,6 @@ exports.updateCourseProgress = (req, res) => {
     })
     .catch(err => utils.handleError(err, res))
 }
-
-/*
-*/
 
 exports.updatePassword = (req, res) => {
   if (req.body && req.body.password) {

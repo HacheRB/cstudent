@@ -1,6 +1,12 @@
 window.onload = () => {
-
-
+  //Username in navbar
+  const userName = (localStorage.getItem('userName'))
+  const loggedUser = document.getElementById('loggedUser')
+  loggedUser.innerHTML = `Logged in as ${userName} `
+  //Edit Profile redirect
+  document.getElementById('editProfile').addEventListener("click", function () {
+    goEditProfile()
+  })
 
   let selectedCourse = null
   //Resource search
@@ -37,10 +43,11 @@ window.onload = () => {
 
 // GET USER Courses - need to improve
 axios
-  .get('http://localhost:3000/api/users/me/courses', { headers: { token: localStorage.getItem('token') } })
+  .get('http://localhost:3000/api/users/me/', { headers: { token: localStorage.getItem('token') } })
   .then(response => {
+    console.log(response)
     const coursesProgress = document.getElementById('users-progress');
-    response.data.forEach(course => {
+    response.data.coursesProgress.forEach(course => {
       console.log(course)
       const courseCard = showCourseProgressCard(course.material_id._id, course.material_id.image_240x135, course.material_id.title, course.material_id.headline, course.totalProgress)
       coursesProgress.innerHTML += courseCard;
@@ -95,4 +102,10 @@ function showCourseSearchResult(id, img, title, author, headline) {
               <p class="card-text">${headline} </p>
             </div>
   </div>`
+}
+
+//FUNCIONES REPETIDAS ? 
+
+function goEditProfile() {
+  window.location = "http://localhost:3000/editProfile.html"
 }

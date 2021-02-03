@@ -7,17 +7,26 @@
   --color-progress-bar: #2C2F33;
 }
 
-/*
-index.html
-*/
 body {
   height: 100vh;
   width:100vw;
   background-color: #2C2F33;
 }
 
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
 footer{
 background: linear-gradient(180deg, rgba(44,47,51,1) 0%, rgba(66,70,75,0.5) 100%);
+  position: absolute;
+  bottom: 0;
+  width: 100%;         
 }
 
 

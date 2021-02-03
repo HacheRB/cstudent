@@ -39,5 +39,4 @@ const socialSchema = new mongoose.Schema({
 })
 
 const socialModel = mongoose.model('social', socialSchema)
-//module.exports = socialModel
-module.exports = socialSchema
+module.exports = socialModel
