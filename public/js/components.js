@@ -30,11 +30,11 @@ export function showCourseSearchResult(id, img, title, author, headline) {
   </div>`
 }
 
-export function showCourseTrackerCard(_id, img, title, hours, estimateCompletion) {
+export function showCourseTrackerCard(_id, img, title, hours, progress, estimateCompletion) {
   return `
   <div class="tracker-container container-md">
           <div class=" prueba-tracker">
-            <div class="card mb-3">
+            <div class="card mt-3 ">
               <div class="row g-0">
                 <div class="col-md-3">
                   <img src="${img}"class="w-100 img-fluid" alt="...">
@@ -49,8 +49,8 @@ export function showCourseTrackerCard(_id, img, title, hours, estimateCompletion
                       </label>
                     </div>
                     <div class="progress">
-                      <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 15%"
-                        aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: ${progress}%"
+                        aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <p class="card-text"><small class="text-muted">Estimated completion date : ${estimateCompletion}</p>
                     <button type="button" id="Reschedule-${_id}">Reschedule</button>

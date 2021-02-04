@@ -56,8 +56,11 @@ font-size:calc(1.375rem + 3.5vw);;
   position: relative;
   min-height: 100vh;
 }
+#password-container, #profile-container{
+  background-color: var(--color-primary);
+}
 
-#search-bar, #users-progress{
+#search-bar, #users-progress, #users-tracking, #search-results{
   background-color: var(--color-primary);
 
 }

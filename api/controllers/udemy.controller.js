@@ -21,6 +21,16 @@ exports.getUdemyCourseByCourseId = (req, res) => {
 
 exports.addUdemyCourse = (req, res) => {
   console.log(req.body)
+
+  Udemy
+    .findOne({ courseId: req.body.courseId })
+    .then(udemyCourse => {
+      console.log(udemyCourse)
+      res.json(udemyCourse)
+    })
+    .catch((err) => utils.handleError(err, res))
+
+
   Udemy
     .create(req.body)
     //Aqui va los campos del model o le pasamos un  objeto json

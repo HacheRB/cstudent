@@ -97,7 +97,6 @@ window.onload = () => {
   })
 }
 
-
 function getUdemyCourseFull(udemyObj) {
   api
     .get(`/udemyAPI/course`, {

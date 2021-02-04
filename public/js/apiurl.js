@@ -1,5 +1,5 @@
 export const api = axios.create({
-  baseURL: "https://cs-tudent.herokuapp.com/api",
+  baseURL: "http://localhost:3000/api",
   timeout: 3000
 })
 /*

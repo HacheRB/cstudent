@@ -20,9 +20,14 @@ export function escapeChars(str) {
 }
 
 export function emptyStringToUndefined(field) {
-  if (field === "" || field === null) {
+  if (field === undefined || field == null || field.length <= 0) {
     return undefined
   } return field
+}
+
+export function formattedDate(date) {
+  console.log(date.toString())
+  console.log(date.toISOString())
 }
 
 export function checkIfUserHasCourse(id) {
@@ -50,8 +55,15 @@ export function printCourses(elementId, response) {
 
 export function printTrackedCourses(elementId, response) {
   let coursesProgress = document.getElementById(elementId);
+  coursesProgress.innerHTML = `
+  <label for="user_tracking_courses">
+        <h5 class="mt-3 mx-3">Tracked Courses.</h5>
+      </label>
+  `
   response.data.coursesProgress.forEach(course => {
-    let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.estimateDate)
+    // let fdate = formattedDate(course.estimateDate)
+    // console.log(fdate)
+    let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.totalProgress, course.estimateDate)
     coursesProgress.innerHTML += courseCard;
   })
 }
