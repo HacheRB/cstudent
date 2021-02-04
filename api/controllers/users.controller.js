@@ -66,17 +66,36 @@ exports.addCourseProgress = (req, res) => {
   User
     .findById(res.locals.user._id)
     .then(userCourse => {
+      console.log("entra en addCourseProgress")
 
+      //NEW    
 
-      userCourse.coursesProgress.push(req.body)
-      userCourse.save((function (err) {
-        if (err) throw err;
-        res.send('Course saved.');
-      })
-      )
+      let userCourseUpdated = {}
+      axios
+        .get(`http://localhost:3000/api/udemyAPI?userSearch=${userSearch}`, {
+          headers: { 'token': localStorage.token },
+          params: {
+            udemyId: userString
+          },
+          timeout: 5000
+        })
+        .then(response => {
+          console.log(response)
+
+        })
+        .catch(err => utils.handleError(err, res))
     })
-    .catch(err => utils.handleError(err, res))
 }
+
+// / NEW
+//   userCourse.coursesProgress.push(req.body)
+//   userCourse.save((function (err) {
+//     if (err) throw err;
+//     res.send('Course saved.');
+//   })
+//   )
+// })
+// .catch(err => utils.handleError(err, res))
 
 exports.updateUser = (req, res) => {
   console.log("req body <<<<<<<<<<<<<<<<<<<<<")

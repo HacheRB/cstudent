@@ -109,7 +109,6 @@ exports.getUdemyCourseById = (req, res) => {
         url: response.data.url,
         content_length_video: response.data.content_length_video
       }
-
       res.status(200).json(data)
     })
     .catch(err => utils.handleError(err, res))

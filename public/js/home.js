@@ -54,6 +54,38 @@ window.onload = () => {
             //formulario del curso
             addComponent(`add-course-form`, addCourseForm(selectedCourse))
 
+            document.getElementById('add-course-btn').addEventListener("click", function () {
+              axios.post('http://localhost:3000/api/users/me/courses', {
+                headers: { 'token': localStorage.token },
+                data: {
+                  courseInfo: selectedCourse,
+                  initial_date: document.getElementById('input-starting-date').value,
+                  hoursPerDay: document.getElementById('input-daily-progress').value
+                }
+              })
+                .then(response => {
+                  //Recargo los tracked courses
+                  let userForm = document.getElementById('add-course-form')
+                  console.log(userForm)
+                  userForm.innerHTML = ''
+                  let clearTracker = document.getElementById('users-tracking').value
+                  clearTracker.innerHTML = ''
+                  axios
+                    .get('http://localhost:3000/api/users/me/', { headers: { token: localStorage.getItem('token') } })
+                    .then(response => {
+                      printTrackedCourses('users-tracking', response)
+                    })
+                    .catch(error => {
+                      console.error(error)
+                    })
+                  // /Recargo los tracked courses para añadir el nuevo
+
+                })
+                .catch(error => {
+                  console.log(error)
+                  alert('Something failed, Course not added!')
+                });
+            })
           })
         })
       })

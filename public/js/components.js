@@ -108,7 +108,7 @@ export function addCourseForm(courseObj) {
             <input type="string" class="form-control" id="input-daily-progress">
           </div>
           <div class="col-md-4 d-flex align-items-end">
-            <button type="button" id="add-course-form" class="btn btn-primary">Add Course</button>
+            <button type="button" id="add-course-btn" class="btn btn-primary">Add Course</button>
           </div>
         </form>`
 }
