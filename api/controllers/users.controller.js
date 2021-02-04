@@ -66,6 +66,8 @@ exports.addCourseProgress = (req, res) => {
   User
     .findById(res.locals.user._id)
     .then(userCourse => {
+
+
       userCourse.coursesProgress.push(req.body)
       userCourse.save((function (err) {
         if (err) throw err;

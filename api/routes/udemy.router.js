@@ -7,7 +7,6 @@ const middleware = require('../utils/middleware');
 router.get('/', middleware.authUser, middleware.isAdmin, udemyController.getAllUdemyCourses)
 router.get('/:courseId', udemyController.getUdemyCourseByCourseId)
 
-
 router.post('/', udemyController.addUdemyCourse)
 
 router.put('/:courseId', udemyController.updateUdemyCourseByCourseId)

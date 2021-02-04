@@ -30,10 +30,42 @@ export function showCourseSearchResult(id, img, title, author, headline) {
   </div>`
 }
 
+export function showCourseTrackerCard(_id, img, title, hours, estimateCompletion) {
+  return `
+  <div class="tracker-container container-md">
+          <div class=" prueba-tracker">
+            <div class="card mb-3">
+              <div class="row g-0">
+                <div class="col-md-3">
+                  <img src="${img}"class="w-100 img-fluid" alt="...">
+                </div>
+                <div class="col-md-9">
+                  <div class="card-body">
+                    <h4 class="card-title">${title}</h4>
+                     <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Study for ${hours} hours
+                      </label>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 15%"
+                        aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="card-text"><small class="text-muted">Estimated completion date : ${estimateCompletion}</p>
+                    <button type="button" id="Reschedule-${_id}">Reschedule</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`
+}
+
 export function showCourseProgressCard(id, img, title, headline, progress) {
   return `
       <div id="${id}" class="card progress-card m-2" style="width: 18rem;">
-        <img src="${img}" class="card-img-top" alt="...">
+        <img src="${img}" class="card-img-top img-fluid" alt="...">
           <div class="card-body">
             <h5 class="card-title">${title}</h5>
             <p class="card-text">${headline}

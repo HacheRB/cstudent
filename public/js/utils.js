@@ -1,4 +1,4 @@
-import { showCourseProgressCard, showCourseSearchResult } from "./components.js";
+import { showCourseProgressCard, showCourseTrackerCard, showCourseSearchResult } from "./components.js";
 
 //REDIRECT FUNCTIONS
 
@@ -24,26 +24,6 @@ export function emptyStringToUndefined(field) {
   } return field
 }
 
-//No funciona
-export function searchUdemyCourses(elementId, response, results) {
-  let courseVar = "prueba"
-  let searchResults = document.getElementById(elementId)
-  searchResults.innerHTML = "";
-  let slicedArray = response.data.slice(0, (results))
-  slicedArray.forEach(course => {
-    let courseCard = document.createElement('div')
-    let courseCardFunc = showCourseSearchResult(course.courseId, course.image_240x135, course.title, course.visible_instructors[0].title, course.headline)
-    courseCard.innerHTML = (courseCardFunc)
-    console.log(courseCard)
-    searchResults.appendChild(courseCard)
-    document.getElementById(`${course.courseId}`).addEventListener("click", function () {
-      courseVar = course;
-      searchResults.innerHTML = "";
-    })
-  })
-  return courseVar
-}
-
 export function checkIfUserHasCourse(id) {
   axios
     .get(`http://localhost:3000/api/users/me`, {
@@ -66,6 +46,15 @@ export function printCourses(elementId, response) {
     coursesProgress.innerHTML += courseCard;
   })
 }
+
+export function printTrackedCourses(elementId, response) {
+  let coursesProgress = document.getElementById(elementId);
+  response.data.coursesProgress.forEach(course => {
+    let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.estimateDate)
+    coursesProgress.innerHTML += courseCard;
+  })
+}
+
 
 function checkIfCourseExists(obj) {
   axios

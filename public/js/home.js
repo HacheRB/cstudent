@@ -1,5 +1,5 @@
-import { checkIfUserHasCourse, escapeChars, goEditProfile, goHome, logOut, printCourses, searchUdemyCourses } from "./utils.js";
-import { addComponent, addCourseSearch, footer, navBar, addCourseForm, showCourseProgressCard, showCourseSearchResult } from "./components.js";
+import { checkIfUserHasCourse, escapeChars, goEditProfile, goHome, logOut, printCourses, printTrackedCourses } from "./utils.js";
+import { addComponent, addCourseSearch, footer, navBar, addCourseForm, showCourseTrackerCard, showCourseProgressCard, showCourseSearchResult } from "./components.js";
 
 window.onload = () => {
   let selectedCourse = null
@@ -21,6 +21,8 @@ window.onload = () => {
   })
   document.getElementById('logout').addEventListener("click", logOut)
 
+
+  //churro abominable
   //Resource search
   document.getElementById('resource_search').addEventListener("click", function () {
     let userSearch = escapeChars(document.getElementById('user_udemy_search').value)
@@ -47,19 +49,10 @@ window.onload = () => {
             console.log("clickeado")
             selectedCourse = course;
             console.log(selectedCourse)
-            /*
-            console.log(checkIfUserHasCourse(selectedCourse.courseId))
-            if (checkIfUserHasCourse(selectedCourse)) {
-              console.log("holaaaaa")
-            }
-*/
             searchResults.innerHTML = "";
             courseForm.innerHTML = "";
             //formulario del curso
             addComponent(`add-course-form`, addCourseForm(selectedCourse))
-            //event listener del curso
-            document.getElementById(`add-course-form`).addEventListener("click", function () {
-            })
 
           })
         })
@@ -71,8 +64,62 @@ window.onload = () => {
 }
 
 
+function getUdemyCourseFull(udemyObj) {
+  axios
+    .get(`http://localhost:3000/api/udemyAPI/course`, {
+      headers: { 'token': localStorage.token }, params: { udemyId: udemyObj.courseId }
+    })
+    .then(response => { })
+  console.log(response)
+    .catch(error => {
+      console.error(error)
+    })
+}
+
+function addUdemyCoursetoCollection() {
+  axios
+    .get(`http://localhost:3000/api/udemy/`, {
+      headers: { 'token': localStorage.token }, params: { udemyId: udemyObj.courseId }
+    })
+    .then(response => { })
+  console.log(response)
+
+    .catch(error => {
+      console.error(error)
+    })
+}
+
+//no funciona
+function searchUdemyCourses(elementId, response, results) {
+  let courseVar = "prueba"
+  let searchResults = document.getElementById(elementId)
+  searchResults.innerHTML = "";
+  let slicedArray = response.data.slice(0, (results))
+  slicedArray.forEach(course => {
+    let courseCard = document.createElement('div')
+    let courseCardFunc = showCourseSearchResult(course.courseId, course.image_240x135, course.title, course.visible_instructors[0].title, course.headline)
+    courseCard.innerHTML = (courseCardFunc)
+    console.log(courseCard)
+    searchResults.appendChild(courseCard)
+    document.getElementById(`${course.courseId}`).addEventListener("click", function () {
+      courseVar = course;
+      searchResults.innerHTML = "";
+    })
+  })
+  return courseVar
+}
 
 
+// GET USER Courses - need to improve
+axios
+  .get('http://localhost:3000/api/users/me/', { headers: { token: localStorage.getItem('token') } })
+  .then(response => {
+    console.log(response)
+    printTrackedCourses('users-tracking', response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 
 // GET USER Courses - need to improve
 axios
