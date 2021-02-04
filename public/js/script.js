@@ -1,3 +1,4 @@
+import { api } from "./apiurl.js"
 import { goHome, goEditProfile } from "./utils.js";
 import { addComponent, footer } from "./components.js";
 
@@ -7,11 +8,12 @@ window.onload = () => {
 
 document.getElementById('signup').addEventListener("click", function () {
   console.log("primera entrada")
-  axios.post('http://localhost:3000/api/auth/register', {
-    userName: document.getElementById('signup_name').value,
-    email: document.getElementById('signup_email').value,
-    password: document.getElementById('signup_password').value
-  })
+  api
+    .post('/auth/register', {
+      userName: document.getElementById('signup_name').value,
+      email: document.getElementById('signup_email').value,
+      password: document.getElementById('signup_password').value
+    })
     .then(function (response) {
       console.log("segunda entrada")
       localStorage.setItem('token', response.data.token)
@@ -26,7 +28,7 @@ document.getElementById('signup').addEventListener("click", function () {
 })
 
 document.getElementById('login').addEventListener("click", function () {
-  axios.post('http://localhost:3000/api/auth/login', {
+  api.post('/auth/login', {
     email: document.getElementById('login_email').value,
     password: document.getElementById('login_password').value
   })

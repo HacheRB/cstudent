@@ -65,7 +65,7 @@ exports.getUserByUserName = (req, res) => {  //need to retrieve only some data
 exports.addCourseProgress = (req, res) => {
   User
     .findById(res.locals.user._id)
-    .then(userCourse => {
+    .then(response => {
       console.log("entra en addCourseProgress")
 
       //NEW    

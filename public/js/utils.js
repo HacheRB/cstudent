@@ -1,17 +1,18 @@
+import { api } from "./apiurl.js"
 import { showCourseProgressCard, showCourseTrackerCard, showCourseSearchResult } from "./components.js";
 
 //REDIRECT FUNCTIONS
 
 export function goHome() {
-  window.location = "http://localhost:3000/home.html"
+  window.location = "../home.html"
 }
 
 export function goEditProfile() {
-  window.location = "http://localhost:3000/editProfile.html"
+  window.location = "../editProfile.html"
 }
 export function logOut() {
   localStorage.clear();
-  window.location.assign("http://localhost:3000")
+  window.location.assign("../index.html")
 }
 
 export function escapeChars(str) {
@@ -25,8 +26,8 @@ export function emptyStringToUndefined(field) {
 }
 
 export function checkIfUserHasCourse(id) {
-  axios
-    .get(`http://localhost:3000/api/users/me`, {
+  api
+    .get(`/users/me`, {
       headers: { 'token': localStorage.token },
     }).then(response => {
       const courseExists = response.data.coursesProgress.some(obj => {
@@ -57,8 +58,8 @@ export function printTrackedCourses(elementId, response) {
 
 
 function checkIfCourseExists(obj) {
-  axios
-    .post(`http://localhost:3000/api/udemy/`, {
+  api
+    .post(`/udemy/`, {
       headers: { 'token': localStorage.token },
       data: {
         courseId: obj.id,
@@ -90,8 +91,8 @@ function checkIfCourseExists(obj) {
 
 
 function addUdemyCourse(obj, instructors) {
-  axios
-    .post(`http://localhost:3000/api/udemy/`, {
+  api
+    .post(`/udemy/`, {
       headers: { 'token': localStorage.token },
       data: {
         courseId: obj.id,

@@ -1,3 +1,4 @@
+import { api } from "./apiurl.js"
 import { checkIfUserHasCourse, escapeChars, goEditProfile, goHome, logOut, printCourses, printTrackedCourses } from "./utils.js";
 import { addComponent, addCourseSearch, footer, navBar, addCourseForm, showCourseTrackerCard, showCourseProgressCard, showCourseSearchResult } from "./components.js";
 
@@ -26,8 +27,8 @@ window.onload = () => {
   //Resource search
   document.getElementById('resource_search').addEventListener("click", function () {
     let userSearch = escapeChars(document.getElementById('user_udemy_search').value)
-    axios
-      .get(`http://localhost:3000/api/udemyAPI?userSearch=${userSearch}`, {
+    api
+      .get(`/udemyAPI?userSearch=${userSearch}`, {
         headers: { 'token': localStorage.token },
       })
       .then(response => {
@@ -55,14 +56,15 @@ window.onload = () => {
             addComponent(`add-course-form`, addCourseForm(selectedCourse))
 
             document.getElementById('add-course-btn').addEventListener("click", function () {
-              axios.post('http://localhost:3000/api/users/me/courses', {
-                headers: { 'token': localStorage.token },
-                data: {
-                  courseInfo: selectedCourse,
-                  initial_date: document.getElementById('input-starting-date').value,
-                  hoursPerDay: document.getElementById('input-daily-progress').value
-                }
-              })
+              api
+                .post('/users/me/courses', {
+                  headers: { 'token': localStorage.token },
+                  data: {
+                    courseInfo: selectedCourse,
+                    initial_date: document.getElementById('input-starting-date').value,
+                    hoursPerDay: document.getElementById('input-daily-progress').value
+                  }
+                })
                 .then(response => {
                   //Recargo los tracked courses
                   let userForm = document.getElementById('add-course-form')
@@ -70,8 +72,8 @@ window.onload = () => {
                   userForm.innerHTML = ''
                   let clearTracker = document.getElementById('users-tracking').value
                   clearTracker.innerHTML = ''
-                  axios
-                    .get('http://localhost:3000/api/users/me/', { headers: { token: localStorage.getItem('token') } })
+                  api
+                    .get('/users/me/', { headers: { token: localStorage.getItem('token') } })
                     .then(response => {
                       printTrackedCourses('users-tracking', response)
                     })
@@ -97,8 +99,8 @@ window.onload = () => {
 
 
 function getUdemyCourseFull(udemyObj) {
-  axios
-    .get(`http://localhost:3000/api/udemyAPI/course`, {
+  api
+    .get(`/udemyAPI/course`, {
       headers: { 'token': localStorage.token }, params: { udemyId: udemyObj.courseId }
     })
     .then(response => { })
@@ -109,8 +111,8 @@ function getUdemyCourseFull(udemyObj) {
 }
 
 function addUdemyCoursetoCollection() {
-  axios
-    .get(`http://localhost:3000/api/udemy/`, {
+  api
+    .get(`/udemy/`, {
       headers: { 'token': localStorage.token }, params: { udemyId: udemyObj.courseId }
     })
     .then(response => { })
@@ -143,8 +145,8 @@ function searchUdemyCourses(elementId, response, results) {
 
 
 // GET USER Courses - need to improve
-axios
-  .get('http://localhost:3000/api/users/me/', { headers: { token: localStorage.getItem('token') } })
+api
+  .get('/users/me/', { headers: { token: localStorage.getItem('token') } })
   .then(response => {
     console.log(response)
     printTrackedCourses('users-tracking', response)
@@ -154,8 +156,8 @@ axios
   })
 
 // GET USER Courses - need to improve
-axios
-  .get('http://localhost:3000/api/users/me/', { headers: { token: localStorage.getItem('token') } })
+api
+  .get('/users/me/', { headers: { token: localStorage.getItem('token') } })
   .then(response => {
     printCourses('users-progress', response)
   })

@@ -1,3 +1,4 @@
+import { api } from "./apiurl.js"
 import { emptyStringToUndefined, goEditProfile, goHome, logOut } from "./utils.js";
 import { addComponent, footer, navBar } from "./components.js";
 
@@ -27,8 +28,8 @@ document.getElementById('update-password-btn').addEventListener("click", functio
     console.log("entra en el if password")
     console.log(localStorage.getItem('token'))
     console.log(document.getElementById('new-password-1').value)
-    axios
-      .put('http://localhost:3000/api/users/me/password', { password: document.getElementById('new-password-1').value }, {
+    api
+      .put('/users/me/password', { password: document.getElementById('new-password-1').value }, {
         headers: { token: localStorage.getItem('token') },
       })
       .then(response => {
@@ -65,8 +66,8 @@ document.getElementById('update-profile-btn').addEventListener("click", function
     }
   }
   console.log(data)
-  axios
-    .put('http://localhost:3000/api/users/me/', data, {
+  api
+    .put('/users/me/', data, {
       headers: { token: localStorage.getItem('token') },
     })
     .then(response => {
