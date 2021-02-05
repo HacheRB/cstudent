@@ -3,10 +3,10 @@ import { checkIfUserHasCourse, escapeChars, goEditProfile, goHome, logOut, print
 import { addComponent, addCourseSearch, footer, navBar, addCourseForm, showCourseTrackerCard, showCourseProgressCard, showCourseSearchResult } from "./components.js";
 
 window.onload = () => {
-  let date = new Date
-  console.log(date)
-  console.log(date.toString())
-  console.log(date.toISOString())
+  // let date = new Date
+  // console.log(date)
+  // console.log(date.toString())
+  // console.log(date.toISOString())
   let selectedCourse = null
   addComponent('navbar', navBar())
   addComponent('search-bar', addCourseSearch())
@@ -37,7 +37,6 @@ window.onload = () => {
       })
       .then(response => {
         //Recorto las busquedas devueltas
-        console.log(response.data[0])
         const searchResults = document.getElementById('search-results')
         const courseForm = document.getElementById('add-course-form')
         searchResults.innerHTML = "";
@@ -51,16 +50,13 @@ window.onload = () => {
           searchResults.appendChild(courseCard)
           //event listener de cada tarjeta
           document.getElementById(`${course.courseId}`).addEventListener("click", function () {
-            console.log("clickeado")
             selectedCourse = course;
-            console.log(selectedCourse)
             searchResults.innerHTML = "";
             courseForm.innerHTML = "";
             //formulario del curso
             addComponent(`add-course-form`, addCourseForm(selectedCourse))
 
             document.getElementById('add-course-btn').addEventListener("click", function () {
-              console.log(selectedCourse)
               // axios
               //   .post('http://localhost:3000/api/users/me/courses', {
               //     data: {
@@ -81,7 +77,6 @@ window.onload = () => {
                 .then(response => {
                   //Recargo los tracked courses
                   let userForm = document.getElementById('add-course-form')
-                  console.log(userForm)
                   userForm.innerHTML = ''
                   let clearTracker = document.getElementById('users-tracking').value
                   clearTracker.innerHTML = ''
@@ -97,7 +92,7 @@ window.onload = () => {
 
                 })
                 .catch(error => {
-                  console.log(error)
+                  console.error(error)
                   alert('Something failed, Course not added!')
                 });
             })
@@ -109,6 +104,26 @@ window.onload = () => {
       });
   })
 }
+// GET USER Courses - need to improve
+api
+  .get('/users/me/', { headers: { token: localStorage.getItem('token') } })
+  .then(response => {
+    printTrackedCourses('users-tracking', response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
+
+// GET USER Courses - need to improve
+api
+  .get('/users/me/', { headers: { token: localStorage.getItem('token') } })
+  .then(response => {
+    printCourses('users-progress', response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
+
 
 function getUdemyCourseFull(udemyObj) {
   api
@@ -116,7 +131,6 @@ function getUdemyCourseFull(udemyObj) {
       headers: { 'token': localStorage.token }, params: { udemyId: udemyObj.courseId }
     })
     .then(response => { })
-  console.log(response)
     .catch(error => {
       console.error(error)
     })
@@ -128,7 +142,6 @@ function addUdemyCoursetoCollection() {
       headers: { 'token': localStorage.token }, params: { udemyId: udemyObj.courseId }
     })
     .then(response => { })
-  console.log(response)
 
     .catch(error => {
       console.error(error)
@@ -145,7 +158,6 @@ function searchUdemyCourses(elementId, response, results) {
     let courseCard = document.createElement('div')
     let courseCardFunc = showCourseSearchResult(course.courseId, course.image_240x135, course.title, course.visible_instructors[0].title, course.headline)
     courseCard.innerHTML = (courseCardFunc)
-    console.log(courseCard)
     searchResults.appendChild(courseCard)
     document.getElementById(`${course.courseId}`).addEventListener("click", function () {
       courseVar = course;
@@ -155,24 +167,3 @@ function searchUdemyCourses(elementId, response, results) {
   return courseVar
 }
 
-
-// GET USER Courses - need to improve
-api
-  .get('/users/me/', { headers: { token: localStorage.getItem('token') } })
-  .then(response => {
-    console.log(response)
-    printTrackedCourses('users-tracking', response)
-  })
-  .catch(error => {
-    console.error(error)
-  })
-
-// GET USER Courses - need to improve
-api
-  .get('/users/me/', { headers: { token: localStorage.getItem('token') } })
-  .then(response => {
-    printCourses('users-progress', response)
-  })
-  .catch(error => {
-    console.error(error)
-  })

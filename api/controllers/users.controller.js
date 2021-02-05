@@ -12,12 +12,10 @@ exports.getAllUsers = (req, res) => {
 }
 
 exports.getUserProfile = (req, res) => {
-  console.log(res.locals.user._id)
   User
     .findById(res.locals.user._id)
     .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
     .then(user => {
-      console.log(user)
       res.json(user)
     })
     .catch(err => utils.handleError(err, res))
@@ -64,17 +62,13 @@ exports.getUserByUserName = (req, res) => {  //need to retrieve only some data
 }
 
 exports.addCourseProgress = (req, res) => {
-  console.log("hola*****************************", res.locals.user)
   User
     .findById(res.locals.user._id)
     .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
     .then(response => {
       let courseObj = response.coursesProgress.filter(course => course.material_id.courseId === req.body.courseInfo.courseId)[0]
 
-      console.log("dentro then addcourseprogress")
-      console.log(response)
       let udemyId = response.courseInfo.courseId
-      console.log(udemyId)
       Udemy
         .findOne({ courseId: udemyId })
         .then(udemyCourse => {
@@ -137,11 +131,9 @@ exports.updateUser = (req, res) => {
 
 //Problemas con esto
 exports.updateCourseProgress = (req, res) => {
-  console.log(res.locals.user._id)
   User
     .findById(res.locals.user._id)
     .then(user => {
-      console.log(user)
       let index = user.coursesProgress.findIndex(x => x._id === req.query.params.id);
       if (!req.body.initialDate === null && !req.body.initialDate === "") {
         user.coursesProgress[index].initialDate = req.body.initialDate
@@ -191,9 +183,7 @@ exports.deleteUserCourseById = (req, res) => {
   User
     .findById(res.locals.user._id)
     .then(user => {
-      console.log("1")
       const course = user.coursesProgress.id(req.params.id)
-      console.log(course)
 
       course.remove()
       user.save((function (err) {

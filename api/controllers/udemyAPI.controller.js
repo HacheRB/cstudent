@@ -30,7 +30,6 @@ exports.getUdemyCoursesBySearchString = (req, res) => {
     timeout: 5000
   })
     .then(courses => {
-      console.log(courses.data.results)
       res.status(200).json(courses.data.results)
     })
     .catch(err => utils.handleError(err, res))
@@ -79,7 +78,6 @@ exports.getUdemyCoursesBySearchString2 = (req, res) => {
 
 
 exports.getUdemyCourseById = (req, res) => {
-  console.log(req.query.udemyId)
   axios.get(`https://www.udemy.com/api-2.0/courses/${req.query.udemyId}/?fields[course]=@all`, {
     headers: {
       'Accept': process.env.UDEMYACCEPT,

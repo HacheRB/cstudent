@@ -13,19 +13,16 @@ exports.getUdemyCourseByCourseId = (req, res) => {
   Udemy
     .findOne({ courseId: req.params.courseId })
     .then(udemyCourse => {
-      console.log(udemyCourse)
       res.json(udemyCourse)
     })
     .catch((err) => utils.handleError(err, res))
 }
 
 exports.addUdemyCourse = (req, res) => {
-  console.log(req.body)
 
   Udemy
     .findOne({ courseId: req.body.courseId })
     .then(udemyCourse => {
-      console.log(udemyCourse)
       res.json(udemyCourse)
     })
     .catch((err) => utils.handleError(err, res))
@@ -47,7 +44,6 @@ exports.updateUdemyCourseByCourseId = (req, res) => {
       runValidators: true
     })
     .then(udemyCourse => {
-      console.log(udemyCourse)
       res.json(udemyCourse)
     })
     .catch((err) => utils.handleError(err, res))

@@ -25,10 +25,10 @@ export function emptyStringToUndefined(field) {
   } return field
 }
 
-export function formattedDate(date) {
-  console.log(date.toString())
-  console.log(date.toISOString())
-}
+// export function formattedDate(date) {
+//   console.log(date.toString())
+//   console.log(date.toISOString())
+// }
 
 export function checkIfUserHasCourse(id) {
   api
@@ -40,7 +40,7 @@ export function checkIfUserHasCourse(id) {
       })
       return courseExists
     }).catch(error => {
-      console.error(error)
+      res.status(500).send(error)
     })
 }
 
@@ -65,8 +65,57 @@ export function printTrackedCourses(elementId, response) {
     // console.log(fdate)
     let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.totalProgress, course.estimateDate)
     coursesProgress.innerHTML += courseCard;
+    //ADD event listener for favorite 
+
+    document.getElementById(`favorite-course-${course._id}`).addEventListener("click", function () {
+
+      console - log(`clicked on ${course_id}`)
+
+      /*
+      api
+        .delete('/me/courses/', {
+          headers: { token: localStorage.getItem('token') },
+          params: {
+            id: course._id
+          }
+        })
+        .then(response => {
+          alert(`Course Added to Favorites`)
+          logOut()
+        })
+        .catch(error => {
+          alert(`Course wasn't added to favorites`)
+          console.error(error)
+        })
+        */
+
+    })
+
+
+    //ADD event listener for delete
+    document.getElementById(`delete-course-${course._id}`).addEventListener("click", function () {
+
+      /*
+            api
+              .delete('', {
+                headers: { token: localStorage.getItem('token') },
+                params: {
+                  id: course._id
+                }
+              })
+              .then(response => {
+                alert("Course Deleted!")
+                logOut()
+              })
+              .catch(error => {
+                alert(`Course wasn't deleted!`)
+                console.error(error)
+              })
+              */
+    })
   })
 }
+
 
 
 function checkIfCourseExists(obj) {
