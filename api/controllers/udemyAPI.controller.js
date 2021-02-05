@@ -37,6 +37,7 @@ exports.getUdemyCoursesBySearchString = (req, res) => {
 
 
 exports.getUdemyCoursesBySearchString2 = (req, res) => {
+  let fields = 'fields[course]'
   const userString = req.query.userSearch
   axios.get("https://www.udemy.com/api-2.0/courses/", {
     headers: {
@@ -44,9 +45,11 @@ exports.getUdemyCoursesBySearchString2 = (req, res) => {
       'Authorization': process.env.UDEMYAUTHORIZATION,
       'Content-Type': process.env.UDEMYCONTENTTYPE
     }, params: {
-      search: userString
+      search: userString,
+      ordering: "relevance",
+      [fields]: "@all"
     },
-    timeout: 5000
+    timeout: 10000
   })
     .then(response => {
       res.status(200).json(response.data.results.map(course => {
