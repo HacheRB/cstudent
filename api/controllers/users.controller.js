@@ -71,14 +71,48 @@ exports.addCourseProgress = (req, res) => {
 
       //si hay curso, actualizamos el curso 
       if (udemyCourse) {
-        console.log("hay un curso")
+        console.log("hay un curso en udemy collection")
+        Udemy
+          .findOneAndUpdate({ courseId: req.body.courseInfo.courseId }, req.body.courseInfo, {
+            new: true,
+            runValidators: true
+          })
+          .then(udemyCourse => {
+            let udemyCourseId = udemyCourse._id
+            console.log("<<<<<<<<<<<<<<<<<<<", udemyCourseId)
+            User
+              .findById(res.locals.user._id)
+              .then(response => {
 
+                console.log("response", response.coursesProgress)
+                console.log(typeof response.coursesProgress[0].material_id)
+                console.log(typeof udemyCourseId)
+
+                console.log(JSON.stringify(response.coursesProgress[0].material_id))
+                console.log(JSON.stringify(udemyCourseId))
+                let courseObj = response.coursesProgress.filter(course => JSON.stringify(course.material_id) === JSON.stringify(udemyCourseId))
+                console.log(courseObj)
+                if (courseObj.length === 0) {
+                  response.coursesProgress.push(
+                    {
+                      material_id: udemyCourseId,
+                      initialDate: initialDate,
+                      dailyEstimate: hoursPerDay
+                    }
+                  )
+                  response.save((function (err) {
+                    if (err) throw err;
+                    res.send('Course Added.');
+                  }))
+                }
+              })
+          })
+          .catch((err) => utils.handleError(err, res))
 
         //---------------------------------------------
         //esto va dentro del then de actualizar curso
         User
           .findById(res.locals.user._id)
-          .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
           .then(response => { })
           .catch((err) => utils.handleError(err, res))
         //---------------------------------------------
@@ -86,6 +120,15 @@ exports.addCourseProgress = (req, res) => {
         //si no hay curso, lo añadimos, le pasamos el id del udemy collection y añadimos curso.
       } else {
         console.log("no hay un curso")
+        console.log(req.body.courseInfo)
+        Udemy
+          .create(req.body.courseInfo)
+          .then(udemyCourse => {
+            console.log("esto es then de create course")
+            console.log(udemyCourse)
+            // res.status(200).json({ udemyCourse })
+          })
+          .catch(err => res.status(500).json(err))
 
       }
 

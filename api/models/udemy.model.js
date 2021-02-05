@@ -41,10 +41,6 @@ const udemySchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  locale: {
-    type: String,
-    default: ""
-  },
   num_lectures: {
     type: Number,
     default: null
@@ -61,10 +57,6 @@ const udemySchema = new mongoose.Schema({
     type: String,
     default: ""
   },
-  primary_subcategory: { // Object.title
-    type: String,
-    default: ""
-  },
   title: {
     type: String,
     default: ""
@@ -73,7 +65,7 @@ const udemySchema = new mongoose.Schema({
     type: String,
     default: ""
   },
-  Visible_instructors: [udemyInstructorSchema],
+  visible_instructors: [udemyInstructorSchema],
   content_length_video: { // In miliseconds /3600. Decimals Rule of Three to change them to minutes
     type: Number,
     default: 0
