@@ -9,11 +9,12 @@ router.get('/:userName', userController.getUserByUserName)
 router.post('/me/courses', middleware.authUser, userController.addCourseProgress) //Create course in user
 
 router.put('/me', middleware.authUser, userController.updateUser)
-//router.put('/me/courses/:id', middleware.authUser, userController.updateCourseProgress) //
+router.put('/me/courses/:id/favorite', middleware.authUser, userController.updateCourseFavorite)
 router.put('/me/password', middleware.authUser, userController.updatePassword)
 
 router.delete('/me', middleware.authUser, userController.deleteUserById)
 router.delete('/me/courses/:id', middleware.authUser, userController.deleteUserCourseById)
+
 
 module.exports = router
 

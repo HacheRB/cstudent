@@ -34,6 +34,24 @@
       </div>
       <!-- /SEARCH BAR -->
 
+      <div class=" d-flex justify-content-left m-3" id="course-info">
+        <h5>${courseObj.title}</h5> - ${courseObj.headline}
+      </div>
+      <form class="row g-3 mb-3">
+        <div class="col-md-4">
+          <label for="input-starting-date" class="form-label">Starting Date</label>
+          <input type="date" class="form-control" id="input-starting-date">
+        </div>
+        <div class="col-md-4">
+          <label for="input-daily-progress" class="form-label">Daily Progress(hours)</label>
+          <input type="string" class="form-control" id="input-daily-progress">
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <button type="button" id="add-course-btn" class="btn btn-primary">Add Course</button>
+        </div>
+      </form>
+
+
 
       <!-- track card -->
       <div class="tracker-container container-md">

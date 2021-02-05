@@ -200,6 +200,27 @@ exports.updateUser = (req, res) => {
     .catch((err) => utils.handleError(err, res))
 }
 
+
+
+//PENDIENTE ? 
+exports.updateCourseFavorite = (req, res) => {
+  console.log("entra en update course")
+  User
+    .findById(res.locals.user._id)
+    .then(user => {
+      const course = user.coursesProgress.id(req.params.id)
+      console.log("que hay en course ", course)
+
+      user.save((function (err) {
+        if (err) throw err;
+        res.send('Course favorite updated');
+      }))
+
+    })
+    .catch(err => utils.handleError(err, res))
+
+
+}
 //Problemas con esto
 exports.updateCourseProgress = (req, res) => {
   User
@@ -255,6 +276,7 @@ exports.deleteUserCourseById = (req, res) => {
     .findById(res.locals.user._id)
     .then(user => {
       const course = user.coursesProgress.id(req.params.id)
+      console.log("que hay ern course ", course)
 
       course.remove()
       user.save((function (err) {

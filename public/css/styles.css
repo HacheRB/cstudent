@@ -60,9 +60,8 @@ font-size:calc(1.375rem + 3.5vw);;
   background-color: var(--color-primary);
 }
 
-#search-bar, #users-progress, #users-tracking, #search-results{
+#search-bar, #users-progress, #users-tracking, #search-results, #add-course-form{
   background-color: var(--color-primary);
-
 }
 
 #search-results{

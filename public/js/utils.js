@@ -25,6 +25,11 @@ export function emptyStringToUndefined(field) {
   } return field
 }
 
+export function parseMongoDate(date) {
+  let parsedDate = new Date(date)
+  return parsedDate.toDateString()
+}
+//parse
 // export function formattedDate(date) {
 //   console.log(date.toString())
 //   console.log(date.toISOString())
@@ -46,7 +51,6 @@ export function checkIfUserHasCourse(id) {
 
 export function printCourses(elementId, response) {
   let coursesProgress = document.getElementById(elementId);
-
   response.data.coursesProgress.forEach(course => {
     let courseCard = showCourseProgressCard(course.material_id._id, course.material_id.image_240x135, course.material_id.title, course.material_id.headline, course.totalProgress)
     coursesProgress.innerHTML += courseCard;
@@ -61,41 +65,51 @@ export function printTrackedCourses(elementId, response) {
       </label>
   `
   response.data.coursesProgress.forEach(course => {
-    let courseId = course._id
+    let estimateDateParsed = parseMongoDate(course.estimateDate)
     let emptyDiv = document.createElement('div')
-    let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.totalProgress, course.estimateDate)
+    let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.totalProgress, estimateDateParsed)
     emptyDiv.innerHTML = (courseCard)
     coursesProgress.appendChild(emptyDiv);
     //ADD event listener for favorite btn
     document.getElementById(`favorite-course-${course._id}`).addEventListener("click", function (courseId) {
-      console.log(`clicked on favorite ${courseId}`)
-      /*
+      console.log(`clicked on favorite ${course._id}`)
       api
-        .delete('/me/courses/', {
-          headers: { token: localStorage.getItem('token') },
-          params: {
-            id: course._id
-          }
-        })
-        .then(response => {
-          alert(`Course Added to Favorites`)
-          logOut()
+        .put(`/users/me/courses/${course._id}/favorite`,
+          { headers: { 'token': localStorage.token } }
+        )
+        .then(() => {
+          alert(`Course Favorite status updated`)
+          window.location.reload()
         })
         .catch(error => {
-          alert(`Course wasn't added to favorites`)
+          alert(`Course didn't udpdate`)
           console.error(error)
         })
-        */
-
     })
+
     //ADD event listener for delete
     document.getElementById(`delete-course-${course._id}`).addEventListener("click", function (courseId) {
-      console.log(`clicked on delete ${courseId}`)
+      console.log(`clicked on delete ${course._id}`)
+
+      api
+        .delete(`/users/me/courses/${course._id}`,
+          { headers: { 'token': localStorage.token } }
+        )
+        .then(() => {
+          alert(`Course Deleted`)
+          window.location.reload()
+        })
+        .catch(error => {
+          alert(`Course wasn't deleted`)
+          console.error(error)
+        })
     })
+
     //ADD event listener for RESCHEDULE
     document.getElementById(`reschedule-${course._id}`).addEventListener("click", function (courseId) {
       console.log(`clicked on reschedule ${courseId}`)
     })
+
     //ADD event listener for daily
     document.getElementById(`daily-checkbox-${course._id}`).addEventListener("click", function (courseId) {
       console.log(`clicked on dailycheckbox ${courseId}`)

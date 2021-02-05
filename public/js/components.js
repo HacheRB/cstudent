@@ -20,7 +20,7 @@ export function showMore(redirect) {
 
 export function showCourseSearchResult(id, img, title, author, headline) {
   return `
- <div id="${id}" class="card d-flex" style="width: 15rem;">
+ <div id="${id}" class="card d-flex mt-3 mb-3 mx-1 " style="width: 15rem; height:27.5rem;">
           <img src="${img}" class="card-img-top p-1" alt="...">
             <div class="card-body">
               <h5 class="card-title">${title}</h5>
@@ -77,8 +77,8 @@ export function showCourseTrackerCard(_id, img, title, hours, progress, estimate
                   </div>
                   <!-- PROGRESS -->
                   <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:10%"
-                      aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:${progress}%"
+                      aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">
                     </div>
                   </div>
                   <!-- ESTIMATE AND RESCHEDULE -->
@@ -89,7 +89,7 @@ export function showCourseTrackerCard(_id, img, title, hours, progress, estimate
                       </p>
                     </div>
                     <div class="d-flex justify-content-end">
-                      <button type="button" id="reschedule-${_id}">Reschedule</button>
+                      <button type="button"class="btn-primary rounded" id="reschedule-${_id}">Reschedule</button>
                     </div>
                   </div>
                   <!-- /ESTIMATE AND RESCHEDULE -->
@@ -137,20 +137,22 @@ export function addCourseSearch() {
 
 export function addCourseForm(courseObj) {
   return `
-  <div class=" d-flex justify-content-left" id="course-info">${courseObj.title} - ${courseObj.headline} </div>
-        <form class="row g-3">
-          <div class="col-md-4">
-            <label for="input-starting-date" class="form-label">Starting Date</label>
-            <input type="date" class="form-control" id="input-starting-date">
-          </div>
-          <div class="col-md-4">
-            <label for="input-daily-progress" class="form-label">Daily Progress(hours)</label>
-            <input type="string" class="form-control" id="input-daily-progress">
-          </div>
-          <div class="col-md-4 d-flex align-items-end">
-            <button type="button" id="add-course-btn" class="btn btn-primary">Add Course</button>
-          </div>
-        </form>`
+  <div class=" d-flex justify-content-left m-3" id="course-info">
+        <h5>${courseObj.title}</h5> - ${courseObj.headline}
+      </div>
+      <form class="row g-3 mb-3">
+        <div class="col-md-4">
+          <label for="input-starting-date" class="form-label">Starting Date</label>
+          <input type="date" class="form-control" id="input-starting-date">
+        </div>
+        <div class="col-md-4">
+          <label for="input-daily-progress" class="form-label">Daily Progress(hours)</label>
+          <input type="string" class="form-control" id="input-daily-progress">
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <button type="button" id="add-course-btn" class="btn btn-primary">Add Course</button>
+        </div>
+      </form>`
 }
 
 /* Add to HTML: 

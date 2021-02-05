@@ -41,7 +41,7 @@ window.onload = () => {
         const courseForm = document.getElementById('add-course-form')
         searchResults.innerHTML = "";
         courseForm.innerHTML = "";
-        const slicedArray = response.data.slice(0, 4)
+        const slicedArray = response.data.slice(0, 5)
         //For each que imprime las tarjetas y  añade los eventlistener para cada una.
         slicedArray.forEach(course => {
           let courseCard = document.createElement('div')
