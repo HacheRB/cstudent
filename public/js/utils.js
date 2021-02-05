@@ -29,6 +29,12 @@ export function parseMongoDate(date) {
   let parsedDate = new Date(date)
   return parsedDate.toDateString()
 }
+
+
+export function calculateEstimate(course) {
+
+
+}
 //parse
 // export function formattedDate(date) {
 //   console.log(date.toString())
@@ -56,6 +62,12 @@ export function printCourses(elementId, response) {
     coursesProgress.innerHTML += courseCard;
   })
 }
+export function selectColor(bool) {
+  if (!bool) {
+    return "currentColor"
+  }
+  return "red"
+}
 
 export function printTrackedCourses(elementId, response) {
   let coursesProgress = document.getElementById(elementId);
@@ -66,19 +78,19 @@ export function printTrackedCourses(elementId, response) {
   `
   response.data.coursesProgress.forEach(course => {
     let estimateDateParsed = parseMongoDate(course.estimateDate)
+    let color = selectColor(course.favorite)
     let emptyDiv = document.createElement('div')
-    let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.totalProgress, estimateDateParsed)
+    let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.totalProgress, estimateDateParsed, color)
     emptyDiv.innerHTML = (courseCard)
     coursesProgress.appendChild(emptyDiv);
     //ADD event listener for favorite btn
     document.getElementById(`favorite-course-${course._id}`).addEventListener("click", function (courseId) {
       console.log(`clicked on favorite ${course._id}`)
       api
-        .put(`/users/me/courses/${course._id}/favorite`,
+        .put(`/users/me/courses/${course._id}/favorite`, {},
           { headers: { 'token': localStorage.token } }
         )
         .then(() => {
-          alert(`Course Favorite status updated`)
           window.location.reload()
         })
         .catch(error => {
@@ -90,7 +102,6 @@ export function printTrackedCourses(elementId, response) {
     //ADD event listener for delete
     document.getElementById(`delete-course-${course._id}`).addEventListener("click", function (courseId) {
       console.log(`clicked on delete ${course._id}`)
-
       api
         .delete(`/users/me/courses/${course._id}`,
           { headers: { 'token': localStorage.token } }

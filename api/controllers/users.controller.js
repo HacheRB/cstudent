@@ -200,6 +200,21 @@ exports.updateUser = (req, res) => {
     .catch((err) => utils.handleError(err, res))
 }
 
+exports.addDailyTask = (req, res) => {
+  console.log("entra en add daily")
+  User
+    .findById(res.locals.user._id)
+    .then(user => {
+      const course = user.coursesProgress.id(req.params.id)
+      console.log(course.daily)
+
+      user.save((function (err) {
+        if (err) throw err;
+        res.send('Course favorite updated');
+      }))
+    })
+    .catch(err => utils.handleError(err, res))
+}
 
 
 //PENDIENTE ? 
@@ -209,18 +224,16 @@ exports.updateCourseFavorite = (req, res) => {
     .findById(res.locals.user._id)
     .then(user => {
       const course = user.coursesProgress.id(req.params.id)
-      console.log("que hay en course ", course)
-
+      course.favorite = !course.favorite
       user.save((function (err) {
         if (err) throw err;
-        res.send('Course favorite updated');
+        res.send(course);
       }))
 
     })
     .catch(err => utils.handleError(err, res))
-
-
 }
+
 //Problemas con esto
 exports.updateCourseProgress = (req, res) => {
   User

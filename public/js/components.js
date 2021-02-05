@@ -31,7 +31,7 @@ export function showCourseSearchResult(id, img, title, author, headline) {
 }
 
 // <div class="tracker-container container-md">
-export function showCourseTrackerCard(_id, img, title, hours, progress, estimateCompletion) {
+export function showCourseTrackerCard(_id, img, title, hours, progress, estimateCompletion, color) {
   return `<!-- track card -->
       <div class="tracker-container container-md">
         <div class=" prueba-tracker">
@@ -52,7 +52,7 @@ export function showCourseTrackerCard(_id, img, title, hours, progress, estimate
 
                       <div class="d-flex justify-content-center align-items-center col-6">
                         <svg id="favorite-course-${_id}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                          fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                          fill="${color}" class="bi bi-heart-fill" viewBox="0 0 16 16">
                           <path fill-rule="evenodd"
                             d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                         </svg>
