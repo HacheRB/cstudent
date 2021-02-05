@@ -61,16 +61,14 @@ export function printTrackedCourses(elementId, response) {
       </label>
   `
   response.data.coursesProgress.forEach(course => {
-    // let fdate = formattedDate(course.estimateDate)
-    // console.log(fdate)
+    let courseId = course._id
+    let emptyDiv = document.createElement('div')
     let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.totalProgress, course.estimateDate)
-    coursesProgress.innerHTML += courseCard;
-    //ADD event listener for favorite 
-
-    document.getElementById(`favorite-course-${course._id}`).addEventListener("click", function () {
-
-      console - log(`clicked on ${course_id}`)
-
+    emptyDiv.innerHTML = (courseCard)
+    coursesProgress.appendChild(emptyDiv);
+    //ADD event listener for favorite btn
+    document.getElementById(`favorite-course-${course._id}`).addEventListener("click", function (courseId) {
+      console.log(`clicked on favorite ${courseId}`)
       /*
       api
         .delete('/me/courses/', {
@@ -90,28 +88,17 @@ export function printTrackedCourses(elementId, response) {
         */
 
     })
-
-
     //ADD event listener for delete
-    document.getElementById(`delete-course-${course._id}`).addEventListener("click", function () {
-
-      /*
-            api
-              .delete('', {
-                headers: { token: localStorage.getItem('token') },
-                params: {
-                  id: course._id
-                }
-              })
-              .then(response => {
-                alert("Course Deleted!")
-                logOut()
-              })
-              .catch(error => {
-                alert(`Course wasn't deleted!`)
-                console.error(error)
-              })
-              */
+    document.getElementById(`delete-course-${course._id}`).addEventListener("click", function (courseId) {
+      console.log(`clicked on delete ${courseId}`)
+    })
+    //ADD event listener for RESCHEDULE
+    document.getElementById(`reschedule-${course._id}`).addEventListener("click", function (courseId) {
+      console.log(`clicked on reschedule ${courseId}`)
+    })
+    //ADD event listener for daily
+    document.getElementById(`daily-checkbox-${course._id}`).addEventListener("click", function (courseId) {
+      console.log(`clicked on dailycheckbox ${courseId}`)
     })
   })
 }

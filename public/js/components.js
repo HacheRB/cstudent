@@ -32,8 +32,8 @@ export function showCourseSearchResult(id, img, title, author, headline) {
 
 // <div class="tracker-container container-md">
 export function showCourseTrackerCard(_id, img, title, hours, progress, estimateCompletion) {
-  return `
-  <div class="tracker-container container-md">
+  return `<!-- track card -->
+      <div class="tracker-container container-md">
         <div class=" prueba-tracker">
           <div class="card mt-3 ">
             <div class="row g-0">
@@ -49,6 +49,7 @@ export function showCourseTrackerCard(_id, img, title, hours, progress, estimate
                     </div>
                     <!-- /Favorite -->
                     <div class="col-2 d-flex justify-content-end">
+
                       <div class="d-flex justify-content-center align-items-center col-6">
                         <svg id="favorite-course-${_id}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                           fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -66,17 +67,18 @@ export function showCourseTrackerCard(_id, img, title, hours, progress, estimate
                       </div>
                     </div>
                   </div>
+
                   <!-- RADIO -->
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="daily-checkbox-${_id}">
+                    <label class="form-check-label" for="daily-checkbox-${_id}">
                       Study for ${hours} hours
                     </label>
                   </div>
                   <!-- PROGRESS -->
                   <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
-                      style="width: ${progress}%" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:10%"
+                      aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
                     </div>
                   </div>
                   <!-- ESTIMATE AND RESCHEDULE -->
@@ -87,7 +89,7 @@ export function showCourseTrackerCard(_id, img, title, hours, progress, estimate
                       </p>
                     </div>
                     <div class="d-flex justify-content-end">
-                      <button type="button" id="Reschedule-${_id}">Reschedule</button>
+                      <button type="button" id="reschedule-${_id}">Reschedule</button>
                     </div>
                   </div>
                   <!-- /ESTIMATE AND RESCHEDULE -->
@@ -96,8 +98,8 @@ export function showCourseTrackerCard(_id, img, title, hours, progress, estimate
             </div>
           </div>
         </div>
-        </div>
-        <!-- /trackcard -->`
+      </div>
+      <!-- /trackcard -->`
 }
 
 export function showCourseProgressCard(id, img, title, headline, progress) {
