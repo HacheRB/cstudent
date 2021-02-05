@@ -57,44 +57,15 @@ window.onload = () => {
             addComponent(`add-course-form`, addCourseForm(selectedCourse))
 
             document.getElementById('add-course-btn').addEventListener("click", function () {
-              // axios
-              //   .post('http://localhost:3000/api/users/me/courses', {
-              //     data: {
-              //       courseInfo: selectedCourse,
-              //       initial_date: document.getElementById('input-starting-date').value,
-              //       hoursPerDay: document.getElementById('input-daily-progress').value
-              //     },
-              //     headers: { 'token': localStorage.token }
-              //   })
-              api
-                .post('/users/me/courses', {
-
-                  courseInfo: selectedCourse,
-                  initial_date: document.getElementById('input-starting-date').value,
-                  hoursPerDay: document.getElementById('input-daily-progress').value
-                }, { headers: { 'token': localStorage.token } }
+              axios
+                .post('http://localhost:3000/api/users/me/courses',
+                  {
+                    courseInfo: selectedCourse,
+                    initial_date: document.getElementById('input-starting-date').value,
+                    hoursPerDay: document.getElementById('input-daily-progress').value
+                  },
+                  { headers: { 'token': localStorage.token } }
                 )
-                .then(response => {
-                  //Recargo los tracked courses
-                  let userForm = document.getElementById('add-course-form')
-                  userForm.innerHTML = ''
-                  let clearTracker = document.getElementById('users-tracking').value
-                  clearTracker.innerHTML = ''
-                  api
-                    .get('/users/me/', { headers: { token: localStorage.getItem('token') } })
-                    .then(response => {
-                      printTrackedCourses('users-tracking', response)
-                    })
-                    .catch(error => {
-                      console.error(error)
-                    })
-                  // /Recargo los tracked courses para añadir el nuevo
-
-                })
-                .catch(error => {
-                  console.error(error)
-                  alert('Something failed, Course not added!')
-                });
             })
           })
         })

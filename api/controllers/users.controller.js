@@ -62,19 +62,47 @@ exports.getUserByUserName = (req, res) => {  //need to retrieve only some data
 }
 
 exports.addCourseProgress = (req, res) => {
-  User
-    .findById(res.locals.user._id)
-    .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
-    .then(response => {
-      let courseObj = response.coursesProgress.filter(course => course.material_id.courseId === req.body.courseInfo.courseId)[0]
+  const initialDate = req.body.initial_date
+  const hoursPerDay = req.body.hoursPerDay
 
-      let udemyId = response.courseInfo.courseId
-      Udemy
-        .findOne({ courseId: udemyId })
-        .then(udemyCourse => {
-        })
-        .catch((err) => utils.handleError(err, res))
+  Udemy
+    .findOne({ courseId: req.body.courseInfo.courseId })
+    .then(udemyCourse => {
+
+      //si hay curso, actualizamos el curso 
+      if (udemyCourse) {
+        console.log("hay un curso")
+
+
+        //---------------------------------------------
+        //esto va dentro del then de actualizar curso
+        User
+          .findById(res.locals.user._id)
+          .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
+          .then(response => { })
+          .catch((err) => utils.handleError(err, res))
+        //---------------------------------------------
+
+        //si no hay curso, lo añadimos, le pasamos el id del udemy collection y añadimos curso.
+      } else {
+        console.log("no hay un curso")
+
+      }
+
     })
+    .catch((err) => utils.handleError(err, res))
+
+
+
+  // User
+  //   .findById(res.locals.user._id)
+  //   .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
+  //   .then(response => {
+  //     console.log(response)
+  //     let courseObj = response.coursesProgress.filter(course => course.material_id.courseId === req.body.courseInfo.courseId)[0]
+  //     let udemyId = response.courseInfo.courseId
+  //   })
+
 }
 
 // / NEW
