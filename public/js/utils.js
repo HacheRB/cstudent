@@ -32,6 +32,13 @@ export function parseMongoDate(date) {
 
 
 export function calculateEstimate(course) {
+  //Coger fecha de la ultima daily y el progreso actual
+
+  //Restar a la duracion total el progreso actual.
+
+  //dividir  el resultaddo(en horas) por las horas diarias
+
+  let durationInHours = course;
 
 
 }
@@ -77,6 +84,7 @@ export function printTrackedCourses(elementId, response) {
       </label>
   `
   response.data.coursesProgress.forEach(course => {
+    console.log(course)
     let estimateDateParsed = parseMongoDate(course.estimateDate)
     let color = selectColor(course.favorite)
     let emptyDiv = document.createElement('div')

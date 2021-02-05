@@ -11,8 +11,15 @@
 body {
   height: 100vh;
   width:auto;
-  background-color: #2C2F33;
+  background-color: var(--color-bg);
   color: var(--color-secondary)
+}
+
+.text-muted {
+  color:white;
+}
+body, #card-bg, .card-course-bg {
+   background-color: var(--color-bg);
 }
 
 footer{

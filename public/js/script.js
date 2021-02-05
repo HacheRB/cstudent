@@ -3,6 +3,10 @@ import { goHome, goEditProfile } from "./utils.js";
 import { addComponent, footer } from "./components.js";
 
 window.onload = () => {
+  if (localStorage.getItem('token')) {
+    window.location = "../home.html"
+  }
+
   addComponent('footer', footer())
 }
 

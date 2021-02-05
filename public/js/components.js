@@ -20,7 +20,7 @@ export function showMore(redirect) {
 
 export function showCourseSearchResult(id, img, title, author, headline) {
   return `
- <div id="${id}" class="card d-flex mt-3 mb-3 mx-1 " style="width: 15rem; height:27.5rem;">
+ <div id="${id}" class="card-course-bg card d-flex mt-3 mb-3 mx-1 " style="width: 15rem; height:27.5rem;">
           <img src="${img}" class="card-img-top p-1" alt="...">
             <div class="card-body">
               <h5 class="card-title">${title}</h5>
@@ -35,7 +35,7 @@ export function showCourseTrackerCard(_id, img, title, hours, progress, estimate
   return `<!-- track card -->
       <div class="tracker-container container-md">
         <div class=" prueba-tracker">
-          <div class="card mt-3 ">
+          <div class="card mt-3" id="card-bg">
             <div class="row g-0">
               <div class="col-md-3">
                 <img src="${img}" class="w-100 img-fluid" alt="...">
@@ -104,7 +104,7 @@ export function showCourseTrackerCard(_id, img, title, hours, progress, estimate
 
 export function showCourseProgressCard(id, img, title, headline, progress) {
   return `
-      <div id="${id}" class="card progress-card m-2" style="width: 18rem;">
+      <div id="${id}" class="card-course-bg card progress-card m-2" style="width: 15rem;">
         <img src="${img}" class="card-img-top img-fluid" alt="...">
           <div class="card-body">
             <h5 class="card-title">${title}</h5>

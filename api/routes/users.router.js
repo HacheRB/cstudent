@@ -7,9 +7,10 @@ router.get('/me', middleware.authUser, userController.getUserProfile)
 router.get('/:userName', userController.getUserByUserName)
 
 router.post('/me/courses', middleware.authUser, userController.addCourseProgress) //Create course in user
-router.post('/me/courses:id/daily', middleware.authUser, userController.addDailyTask)
+router.post('/me/courses/:id/daily', middleware.authUser, userController.addDailyTask)
 
 router.put('/me', middleware.authUser, userController.updateUser)
+router.put('/me/courses/:id/daily', middleware.authUser, userController.updateDailyTask)
 router.put('/me/courses/:id/favorite', middleware.authUser, userController.updateCourseFavorite)
 router.put('/me/password', middleware.authUser, userController.updatePassword)
 
