@@ -3,7 +3,6 @@ const User = require('../models/users.model')
 
 // Authentication Middleware
 exports.authUser = (req, res, next) => {
-  console.log(req.headers.token)
   if (!req.headers.token) {
     res.status(401).json({ error: 'No Token found' })
   } else {

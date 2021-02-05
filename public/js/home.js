@@ -3,6 +3,10 @@ import { checkIfUserHasCourse, escapeChars, goEditProfile, goHome, logOut, print
 import { addComponent, addCourseSearch, footer, navBar, addCourseForm, showCourseTrackerCard, showCourseProgressCard, showCourseSearchResult } from "./components.js";
 
 window.onload = () => {
+  let date = new Date
+  console.log(date)
+  console.log(date.toString())
+  console.log(date.toISOString())
   let selectedCourse = null
   addComponent('navbar', navBar())
   addComponent('search-bar', addCourseSearch())
@@ -56,15 +60,24 @@ window.onload = () => {
             addComponent(`add-course-form`, addCourseForm(selectedCourse))
 
             document.getElementById('add-course-btn').addEventListener("click", function () {
+              console.log(selectedCourse)
+              // axios
+              //   .post('http://localhost:3000/api/users/me/courses', {
+              //     data: {
+              //       courseInfo: selectedCourse,
+              //       initial_date: document.getElementById('input-starting-date').value,
+              //       hoursPerDay: document.getElementById('input-daily-progress').value
+              //     },
+              //     headers: { 'token': localStorage.token }
+              //   })
               api
                 .post('/users/me/courses', {
-                  headers: { 'token': localStorage.token },
-                  data: {
-                    courseInfo: selectedCourse,
-                    initial_date: document.getElementById('input-starting-date').value,
-                    hoursPerDay: document.getElementById('input-daily-progress').value
-                  }
-                })
+
+                  courseInfo: selectedCourse,
+                  initial_date: document.getElementById('input-starting-date').value,
+                  hoursPerDay: document.getElementById('input-daily-progress').value
+                }, { headers: { 'token': localStorage.token } }
+                )
                 .then(response => {
                   //Recargo los tracked courses
                   let userForm = document.getElementById('add-course-form')

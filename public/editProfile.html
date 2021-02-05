@@ -28,14 +28,7 @@
 
       <div class="password-container d-flex justify-content-center p-3">
         <form class="row mb-6">
-          <!-- PENDING ACTUAL PASSWORD CHECK
-      <div class="row mb-6">
-        <label for="actual-password" class="col-sm-2 col-form-label">Actual Password</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" id="actual-password">
-        </div>
-      </div>
--->
+          <!-- PENDING ACTUAL PASSWORD CHECK-->
           <div class="row mb-3">
             <label for="new-password-1" class="col-sm-2 col-form-label">New Password</label>
             <div class="col-sm-10">
@@ -54,7 +47,8 @@
         </form>
       </div>
 
-      <div class="profile-container d-flex justify-content-center p-3">
+      <!-- PRUEBA  -->
+      <div class="password-container d-flex justify-content-center p-3">
         <form class="row mb-6">
           <div class="row mb-3">
             <label for="update-email" class="col-sm-2 col-form-label">Email</label>
@@ -89,12 +83,8 @@
           <div class="row mb-3">
             <label for="update-birthdate" class="col-sm-2 col-form-label">Birthdate</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" id="update-birthdate">
+              <input type="date" class="form-control" id="new-prueba-2">
             </div>
-          </div>
-          <div class="row mb-3">
-
-            <h3 class="text-white">SOCIAL</h3>
           </div>
           <div class="row mb-3">
             <label for="social-personal" class="col-sm-2 col-form-label">Personal</label>
@@ -133,13 +123,46 @@
             </div>
           </div>
           <div class="d-flex justify-content-end row mb-3">
-            <button type="button" class="btn btn-primary col-sm-3" id="update-profile-btn">Update Profile</button>
+            <button type="button" class="btn btn-primary col-sm-3" id="update-profile-btn"> Update Profile</button>
           </div>
         </form>
       </div>
 
+      <!-- PRUEBA  -->
 
+      <!-- Button trigger modal -->
+      <div class="container-fluid  d-flex justify-content-center p-3">
+        <div class="row d-flex justify-content-center col-4">
+          <button type="button" class="btn bg-danger text-white d-flex justify-content-center" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            Delete Account
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row col-12 mx-auto">
+                <h5>Are you sure you want to delete your account?</h5>
+              </div>
+              <div class="row col-6 mx-auto mt-3">
+                <button type="button" id="confirm-delete-account"
+                  class="btn bg-danger text-white justify-content-center">
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
     <!-- /CONTENT WRAP -->
     <!-- FOOTER -->
     <footer id="footer">

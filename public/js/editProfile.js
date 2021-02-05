@@ -44,6 +44,25 @@ document.getElementById('update-password-btn').addEventListener("click", functio
     alert(`New Password doesn't match`)
   }
 })
+
+//Delete Account
+document.getElementById('confirm-delete-account').addEventListener("click", function () {
+  api
+    .delete('/users/me/', {
+      headers: { token: localStorage.getItem('token') },
+    })
+    .then(response => {
+      console.log(response)
+      alert("Your account was deleted correctly!")
+      logOut()
+    })
+    .catch(error => {
+      alert('Something went wrong!')
+      console.error(error)
+    })
+})
+
+
 //No Funciona
 document.getElementById('update-profile-btn').addEventListener("click", function () {
   console.log("update profile")
@@ -65,7 +84,7 @@ document.getElementById('update-profile-btn').addEventListener("click", function
       github: emptyStringToUndefined(document.getElementById('social-github').value)
     }
   }
-  console.log(data)
+
   api
     .put('/users/me/', data, {
       headers: { token: localStorage.getItem('token') },
@@ -78,7 +97,7 @@ document.getElementById('update-profile-btn').addEventListener("click", function
       alert('Something went wrong!')
       console.error(error)
     })
-}
-)
+})
+
 
 

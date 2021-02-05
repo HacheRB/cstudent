@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/users.model')
 const utils = require('../utils/utils')
+const Udemy = require('../models/udemy.model')
 const validator = require('validator');
 
 exports.getAllUsers = (req, res) => {
@@ -63,27 +64,22 @@ exports.getUserByUserName = (req, res) => {  //need to retrieve only some data
 }
 
 exports.addCourseProgress = (req, res) => {
+  console.log("hola*****************************", res.locals.user)
   User
     .findById(res.locals.user._id)
+    .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
     .then(response => {
-      console.log("entra en addCourseProgress")
+      let courseObj = response.coursesProgress.filter(course => course.material_id.courseId === req.body.courseInfo.courseId)[0]
 
-      //NEW    
-
-      let userCourseUpdated = {}
-      axios
-        .get(`http://localhost:3000/api/udemyAPI?userSearch=${userSearch}`, {
-          headers: { 'token': localStorage.token },
-          params: {
-            udemyId: userString
-          },
-          timeout: 5000
+      console.log("dentro then addcourseprogress")
+      console.log(response)
+      let udemyId = response.courseInfo.courseId
+      console.log(udemyId)
+      Udemy
+        .findOne({ courseId: udemyId })
+        .then(udemyCourse => {
         })
-        .then(response => {
-          console.log(response)
-
-        })
-        .catch(err => utils.handleError(err, res))
+        .catch((err) => utils.handleError(err, res))
     })
 }
 
@@ -98,16 +94,41 @@ exports.addCourseProgress = (req, res) => {
 // .catch(err => utils.handleError(err, res))
 
 exports.updateUser = (req, res) => {
-  console.log("req body <<<<<<<<<<<<<<<<<<<<<")
-  console.log(req.body)
-  console.log("req body <<<<<<<<<<<<<<<<<<<<<")
+
+  let country = req.body.location.country || res.locals.user.location.country
+  let city = req.body.location.city || res.locals.user.location.city
+  let personal = req.body.socialLinks.personal || res.locals.user.socialLinks.personal
+  let facebook = req.body.socialLinks.facebook || res.locals.user.socialLinks.facebook
+  let instagram = req.body.socialLinks.instagram || res.locals.user.socialLinks.instagram
+  let linkedin = req.body.socialLinks.linkedin || res.locals.user.socialLinks.linkedin
+  let twitter = req.body.socialLinks.twitter || res.locals.user.socialLinks.twitter
+  let github = req.body.socialLinks.github || res.locals.user.socialLinks.github
 
   User
-    .findByIdAndUpdate(res.locals.user.id, req.body, {
-      new: true,
-      runValidators: true,
-      omitUndefined: true
-    })
+    .findByIdAndUpdate(res.locals.user.id,
+      {
+        email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        birthDate: req.body.birthDate,
+        location: {
+          country: country,
+          city: city
+        },
+        socialLinks: {
+          personal: personal,
+          facebook: facebook,
+          instagram: instagram,
+          linkedin: linkedin,
+          twitter: twitter,
+          github: github
+        }
+      },
+      {
+        new: true,
+        runValidators: true,
+        omitUndefined: true
+      })
     .then(user => {
       res.send(`Congratulations ${user.userName}, your profile was updated`)
     })
