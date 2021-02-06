@@ -31,7 +31,7 @@ export function showCourseSearchResult(id, img, title, author, headline) {
 }
 
 // <div class="tracker-container container-md">
-export function showCourseTrackerCard(_id, img, title, hours, progress, estimateCompletion, color) {
+export function showCourseTrackerCard(_id, img, title, hours, progress, estimateCompletion, color, dailyDone) {
   return `<!-- track card -->
       <div class="tracker-container container-md">
         <div class=" prueba-tracker">
@@ -70,7 +70,7 @@ export function showCourseTrackerCard(_id, img, title, hours, progress, estimate
 
                   <!-- RADIO -->
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="daily-checkbox-${_id}">
+                    <input class="form-check-input" type="checkbox" value="" id="daily-checkbox-${_id}" ${dailyDone}>
                     <label class="form-check-label" for="daily-checkbox-${_id}">
                       Study for ${hours} hours
                     </label>
@@ -106,7 +106,7 @@ export function showCourseProgressCard(id, img, title, headline, progress) {
   return `
       <div id="${id}" class="card-course-bg card progress-card m-2" style="width: 15rem;">
         <img src="${img}" class="card-img-top img-fluid" alt="...">
-          <div class="card-body">
+          <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title">${title}</h5>
             <p class="card-text">${headline}
             </p>

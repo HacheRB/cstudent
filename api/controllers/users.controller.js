@@ -120,10 +120,9 @@ async function addCourseProgress2(req, res, udemyLocalId) {
   catch (err) { console.error(err) }
 }
 
+//separar en el refactor
 async function addDailyTask2(req, res, courseProgress) {
   try {
-
-
   }
   catch (err) { console.error(err) }
 }
@@ -292,16 +291,15 @@ exports.addDailyTask = (req, res) => {
 }
 
 exports.updateDailyTask = (req, res) => {
-  console.log("entra en add daily")
+  console.log("entra en update daily")
   User
     .findById(res.locals.user._id)
     .then(user => {
       const course = user.coursesProgress.id(req.params.id)
-      console.log(course.daily)
-
+      course.daily[0].completed = !course.daily[0].completed
       user.save((function (err) {
         if (err) throw err;
-        res.send('Course favorite updated');
+        res.send(course.daily[0]);
       }))
     })
     .catch(err => utils.handleError(err, res))

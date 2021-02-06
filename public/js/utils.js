@@ -76,6 +76,32 @@ export function selectColor(bool) {
   return "red"
 }
 
+export function selectDailyStatus(bool) {
+  if (!bool) {
+    return ""
+  }
+  return "checked"
+}
+
+export function changeSecondstoHours(seconds) {
+  let minutes = Math.floor(seconds / 60)
+  let minutesRest = Math.floor(minutes % 60)
+  let hours = (minutes - minutesRest) / 60
+  if (minutesRest > 31) {
+    hours++
+  }
+  return hours
+}
+
+export function calculateEstimatedDate(course) {
+  let initialDate = new Date(course.initialDate)
+  let hours = changeSecondstoHours(course.material_id.content_length_video)
+  let days = hours / course.dailyEstimate
+  let finalDate = new Date(course.initialDate)
+  const year = initialDate.getFullYear()
+  return (new Date(finalDate.setDate((initialDate).getDate() + days))).toDateString()
+}
+
 export function printTrackedCourses(elementId, response) {
   let coursesProgress = document.getElementById(elementId);
   coursesProgress.innerHTML = `
@@ -84,36 +110,32 @@ export function printTrackedCourses(elementId, response) {
       </label>
   `
   response.data.coursesProgress.forEach(course => {
-    console.log(course)
     let estimateDateParsed = parseMongoDate(course.estimateDate)
     let color = selectColor(course.favorite)
+    let daily = selectDailyStatus(course.daily[0].completed)
+    let estimate = (calculateEstimatedDate(course))
     let emptyDiv = document.createElement('div')
-    let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.totalProgress, estimateDateParsed, color)
+    let courseCard = showCourseTrackerCard(course._id, course.material_id.image_240x135, course.material_id.title, course.dailyEstimate, course.totalProgress, estimate, color, daily)
     emptyDiv.innerHTML = (courseCard)
     coursesProgress.appendChild(emptyDiv);
+
     //ADD event listener for favorite btn
-    document.getElementById(`favorite-course-${course._id}`).addEventListener("click", function (courseId) {
-      console.log(`clicked on favorite ${course._id}`)
+    document.getElementById(`favorite-course-${course._id}`).addEventListener("click", function () {
       api
-        .put(`/users/me/courses/${course._id}/favorite`, {},
-          { headers: { 'token': localStorage.token } }
-        )
+        .put(`/users/me/courses/${course._id}/favorite`, {}, { headers: { 'token': localStorage.token } })
         .then(() => {
           window.location.reload()
         })
         .catch(error => {
-          alert(`Course didn't udpdate`)
+          alert(`Daily wasn't updated`)
           console.error(error)
         })
     })
 
     //ADD event listener for delete
-    document.getElementById(`delete-course-${course._id}`).addEventListener("click", function (courseId) {
-      console.log(`clicked on delete ${course._id}`)
+    document.getElementById(`delete-course-${course._id}`).addEventListener("click", function () {
       api
-        .delete(`/users/me/courses/${course._id}`,
-          { headers: { 'token': localStorage.token } }
-        )
+        .delete(`/users/me/courses/${course._id}`, { headers: { 'token': localStorage.token } })
         .then(() => {
           alert(`Course Deleted`)
           window.location.reload()
@@ -124,15 +146,26 @@ export function printTrackedCourses(elementId, response) {
         })
     })
 
-    //ADD event listener for RESCHEDULE
-    document.getElementById(`reschedule-${course._id}`).addEventListener("click", function (courseId) {
-      console.log(`clicked on reschedule ${courseId}`)
+    //ADD event listener for daily
+    document.getElementById(`daily-checkbox-${course._id}`).addEventListener("click", function () {
+      api
+        .put(`/users/me/courses/${course._id}/daily`, {}, { headers: { 'token': localStorage.token } }
+        )
+        .then(() => {
+          alert(`Daily Updated`)
+          window.location.reload()
+        })
+        .catch(error => {
+          alert(`Course wasn't deleted`)
+          console.error(error)
+        })
     })
 
-    //ADD event listener for daily
-    document.getElementById(`daily-checkbox-${course._id}`).addEventListener("click", function (courseId) {
-      console.log(`clicked on dailycheckbox ${courseId}`)
+    //ADD event listener for RESCHEDULE
+    document.getElementById(`reschedule-${course._id}`).addEventListener("click", function () {
     })
+
+
   })
 }
 

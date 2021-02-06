@@ -57,8 +57,8 @@ window.onload = () => {
             addComponent(`add-course-form`, addCourseForm(selectedCourse))
 
             document.getElementById('add-course-btn').addEventListener("click", function () {
-              axios
-                .post('http://localhost:3000/api/users/me/courses',
+              api
+                .post('/users/me/courses',
                   {
                     courseInfo: selectedCourse,
                     initial_date: document.getElementById('input-starting-date').value,
@@ -66,6 +66,7 @@ window.onload = () => {
                   },
                   { headers: { 'token': localStorage.token } }
                 )
+              window.location.reload()
             })
           })
         })
