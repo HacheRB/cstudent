@@ -5,6 +5,11 @@ import { addComponent, footer, navBar } from "./components.js";
 window.onload = () => {
   addComponent('navbar', navBar())
   addComponent('footer', footer())
+
+  //Tracker in navbar
+  document.getElementById('tracker-btn').addEventListener("click", function () {
+    goHome()
+  })git
   //Username in navbar
   const userName = (localStorage.getItem('userName'))
   const loggedUser = document.getElementById('loggedUser')

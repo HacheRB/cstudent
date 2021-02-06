@@ -163,7 +163,7 @@ export function navBar() {
     <div class="container-fluid ">
       <a class="navbar-brand text-white px-3" id="home-bt" href="#">CStudent</a>
       <ul class="navbar-nav d-flex justify-content-end flex-row pe-3">
-        <a class="nav-link active text-white pe-4" aria-current="page" href="#">Tracker</a>
+        <a id="tracker-btn" class="nav-link active text-white pe-4" aria-current="page" href="#">Tracker</a>
         <!-- PROFILE -->
         <a class="nav-link text-white pe-4" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
             fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
