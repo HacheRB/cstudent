@@ -55,6 +55,9 @@ font-size:calc(1.375rem + 3.5vw);;
   padding-bottom: 2.5rem;  
       transform: translateY(100%);
 }
+#content-wrap {
+  padding-bottom: 2.5rem;  
+}
 
 #course-status{
   display:block;

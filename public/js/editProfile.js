@@ -9,7 +9,7 @@ window.onload = () => {
   //Tracker in navbar
   document.getElementById('tracker-btn').addEventListener("click", function () {
     goHome()
-  })git
+  })
   //Username in navbar
   const userName = (localStorage.getItem('userName'))
   const loggedUser = document.getElementById('loggedUser')
