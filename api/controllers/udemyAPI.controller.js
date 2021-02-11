@@ -35,7 +35,6 @@ exports.getUdemyCoursesBySearchString = (req, res) => {
     .catch(err => utils.handleError(err, res))
 }
 
-
 exports.getUdemyCoursesBySearchString2 = (req, res) => {
   let fields = 'fields[course]'
   const userString = req.query.userSearch
@@ -76,7 +75,6 @@ exports.getUdemyCoursesBySearchString2 = (req, res) => {
     })
     .catch(err => utils.handleError(err, res))
 }
-
 
 exports.getUdemyCourseById = (req, res) => {
   axios.get(`https://www.udemy.com/api-2.0/courses/${req.query.udemyId}/?fields[course]=@all`, {

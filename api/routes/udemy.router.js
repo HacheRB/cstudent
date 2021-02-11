@@ -2,8 +2,6 @@ const router = require('express').Router()
 const udemyController = require('../controllers/udemy.controller')
 const middleware = require('../utils/middleware');
 
-//Maybe add a route to filter courses
-
 router.get('/', middleware.authUser, middleware.isAdmin, udemyController.getAllUdemyCourses)
 router.get('/:courseId', udemyController.getUdemyCourseByCourseId)
 

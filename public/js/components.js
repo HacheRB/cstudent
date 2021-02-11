@@ -118,7 +118,6 @@ export function showCourseProgressCard(id, img, title, headline, progress) {
   `
 }
 
-
 /* Add to HTML:
 <div id="search-bar" class="container-lg search-container rounded mt-4"></div>
 */

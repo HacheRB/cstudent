@@ -6,7 +6,7 @@ router.get('/', middleware.authUser, middleware.isAdmin, userController.getAllUs
 router.get('/me', middleware.authUser, userController.getUserProfile)
 router.get('/:userName', userController.getUserByUserName)
 
-router.post('/me/courses', middleware.authUser, userController.addCourseProgress) //Create course in user
+router.post('/me/courses', middleware.authUser, userController.addCourseProgress)
 router.post('/me/courses/:id/daily', middleware.authUser, userController.addDailyTask)
 
 router.put('/me', middleware.authUser, userController.updateUser)
@@ -19,5 +19,3 @@ router.delete('/me/courses/:id', middleware.authUser, userController.deleteUserC
 
 
 module.exports = router
-
-//add daily, edit daily routes ?

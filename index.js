@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const path = require('path')
 
-// NONGOOSE
+// MONGOOSE
 mongoose.connect(process.env.MONGO_URL,
   {
     dbName: process.env.MONGO_DB || 'test',
@@ -23,20 +23,20 @@ mongoose.connect(process.env.MONGO_URL,
 
 // ADDING MIDDLEWARES & ROUTER
 const app = express()
-  // .use(helmet.contentSecurityPolicy({
-  //   directives: {
-  //     defaultSrc: ["'self'"],
-  //     scriptSrc: ["'self'", 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'],
-  //     styleSrc: ["'self'", 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css']
-  //   }
-  // }))
+  .use(helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'],
+      styleSrc: ["'self'", 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css']
+    }
+  }))
   .use(cors())
   .use(morgan('combined'))
   .use(express.json())
   .use(express.static(path.join(__dirname, 'public')))
   .use('/api', require('./api/routes'))
 
-// Init server
+// INIT SERVER
 const PORT = process.env.PORT || 2222
 app.listen(PORT, (err) => {
   if (err) { throw new Error(err) }

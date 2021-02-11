@@ -67,8 +67,6 @@ document.getElementById('confirm-delete-account').addEventListener("click", func
     })
 })
 
-
-//No Funciona
 document.getElementById('update-profile-btn').addEventListener("click", function () {
   console.log("update profile")
   const data = {
@@ -89,7 +87,6 @@ document.getElementById('update-profile-btn').addEventListener("click", function
       github: emptyStringToUndefined(document.getElementById('social-github').value)
     }
   }
-
   api
     .put('/users/me/', data, {
       headers: { token: localStorage.getItem('token') },

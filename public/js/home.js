@@ -3,10 +3,6 @@ import { checkIfUserHasCourse, escapeChars, goEditProfile, goHome, logOut, print
 import { addComponent, addCourseSearch, footer, navBar, addCourseForm, showCourseTrackerCard, showCourseProgressCard, showCourseSearchResult } from "./components.js";
 
 window.onload = () => {
-  // let date = new Date
-  // console.log(date)
-  // console.log(date.toString())
-  // console.log(date.toISOString())
   let selectedCourse = null
   addComponent('navbar', navBar())
   addComponent('search-bar', addCourseSearch())
@@ -81,7 +77,8 @@ window.onload = () => {
       });
   })
 }
-// GET USER Courses - need to improve
+
+// GET USER TRACKED PROGRESS - need to improve
 api
   .get('/users/me/', { headers: { token: localStorage.getItem('token') } })
   .then(response => {
@@ -100,47 +97,4 @@ api
   .catch(error => {
     console.error(error)
   })
-
-
-function getUdemyCourseFull(udemyObj) {
-  api
-    .get(`/udemyAPI/course`, {
-      headers: { 'token': localStorage.token }, params: { udemyId: udemyObj.courseId }
-    })
-    .then(response => { })
-    .catch(error => {
-      console.error(error)
-    })
-}
-
-function addUdemyCoursetoCollection() {
-  api
-    .get(`/udemy/`, {
-      headers: { 'token': localStorage.token }, params: { udemyId: udemyObj.courseId }
-    })
-    .then(response => { })
-
-    .catch(error => {
-      console.error(error)
-    })
-}
-
-//no funciona
-function searchUdemyCourses(elementId, response, results) {
-  let courseVar = "prueba"
-  let searchResults = document.getElementById(elementId)
-  searchResults.innerHTML = "";
-  let slicedArray = response.data.slice(0, (results))
-  slicedArray.forEach(course => {
-    let courseCard = document.createElement('div')
-    let courseCardFunc = showCourseSearchResult(course.courseId, course.image_240x135, course.title, course.visible_instructors[0].title, course.headline)
-    courseCard.innerHTML = (courseCardFunc)
-    searchResults.appendChild(courseCard)
-    document.getElementById(`${course.courseId}`).addEventListener("click", function () {
-      courseVar = course;
-      searchResults.innerHTML = "";
-    })
-  })
-  return courseVar
-}
 

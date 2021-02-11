@@ -61,14 +61,6 @@ exports.getUserByUserName = (req, res) => {  //need to retrieve only some data
     .catch((err) => utils.handleError(err, res))
 }
 
-async function example(req, res) {
-  try {
-
-  }
-  catch (err) { console.error(err) }
-
-}
-
 async function getUdemyCourseById(req, res) {
   try {
     const udemyCourse = await Udemy.findOne({ courseId: req.body.courseInfo.courseId })
@@ -131,107 +123,12 @@ exports.addCourseProgress = async (req, res) => {
   let udemyCourse = await getUdemyCourseById(req, res)
   if (udemyCourse) {
     udemyCourse = await updateUdemyCourse(req, res)
-
   } else {
     udemyCourse = await addUdemyCourse2(req, res)
   }
   let lastCourseProgress = await addCourseProgress2(req, res, udemyCourse._id)
   console.log(lastCourseProgress)
-
-
-
-
-  /*
-  Udemy
-    .findOne({ courseId: req.body.courseInfo.courseId })
-    .then(udemyCourse => {
-      //si hay curso, actualizamos el curso 
-      if (udemyCourse) {
-        console.log("hay un curso en udemy collection")
-        Udemy
-          .findOneAndUpdate({ courseId: req.body.courseInfo.courseId }, req.body.courseInfo, {
-            new: true,
-            runValidators: true
-          })
-          .then(udemyCourse => {
-            let udemyCourseId = udemyCourse._id
-            User
-              .findById(res.locals.user._id)
-              .then(response => {
-                let courseObj = response.coursesProgress.filter(course => JSON.stringify(course.material_id) === JSON.stringify(udemyCourseId))
-                if (courseObj.length === 0) {
-                  response.coursesProgress.push(
-                    {
-                      material_id: udemyCourseId,
-                      initialDate: initialDate,
-                      dailyEstimate: hoursPerDay
-                    }
-                  )
-                  response.save((function (err) {
-                    if (err) throw err;
-                    console.log(response.coursesProgress)
-                    let arr = response.coursesProgress
-                    arr[(arr.length - 1)].daily.unshift({
-                      date: new Date(),
-                      completed: false,
-                      dailyProgress: hoursPerDay,
-                      estimadedProgress: hoursPerDay
-                    })
-                    console.log("<zzzzzzzzzzzzzzzzzzzzzzzzz", arr.length, response.coursesProgress.length)
-                   
-                    }))
-                  }))
-                }
-              })
-          })
-          .catch((err) => utils.handleError(err, res))
- 
-        //---------------------------------------------
-        //esto va dentro del then de actualizar curso
-        User
-          .findById(res.locals.user._id)
-          .then(response => { })
-          .catch((err) => utils.handleError(err, res))
-        //---------------------------------------------
- 
-        //si no hay curso, lo añadimos, le pasamos el id del udemy collection y añadimos curso.
-      } else {
-        console.log("no hay un curso")
-        console.log(req.body.courseInfo)
-        Udemy
-          .create(req.body.courseInfo)
-          .then(udemyCourse => {
-            console.log("esto es then de create course")
-            console.log(udemyCourse)
-            // res.status(200).json({ udemyCourse })
-          })
-          .catch(err => res.status(500).json(err))
-      }
-    })
-    .catch((err) => utils.handleError(err, res))
- 
- 
- 
-  // User
-  //   .findById(res.locals.user._id)
-  //   .populate({ path: 'coursesProgress.material_id', 'model': 'udemycourse' })
-  //   .then(response => {
-  //     console.log(response)
-  //     let courseObj = response.coursesProgress.filter(course => course.material_id.courseId === req.body.courseInfo.courseId)[0]
-  //     let udemyId = response.courseInfo.courseId
-  //   })*/
-
 }
-
-// / NEW
-//   userCourse.coursesProgress.push(req.body)
-//   userCourse.save((function (err) {
-//     if (err) throw err;
-//     res.send('Course saved.');
-//   })
-//   )
-// })
-// .catch(err => utils.handleError(err, res))
 
 exports.updateUser = (req, res) => {
 
@@ -305,7 +202,6 @@ exports.updateDailyTask = (req, res) => {
     .catch(err => utils.handleError(err, res))
 }
 
-//PENDIENTE ? 
 exports.updateCourseFavorite = (req, res) => {
   console.log("entra en update course")
   User
@@ -378,7 +274,6 @@ exports.deleteUserCourseById = (req, res) => {
     .then(user => {
       const course = user.coursesProgress.id(req.params.id)
       console.log("que hay ern course ", course)
-
       course.remove()
       user.save((function (err) {
         if (err) throw err;

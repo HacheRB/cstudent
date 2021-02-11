@@ -21,7 +21,6 @@ exports.getUdemyCourseByCourseId = (req, res) => {
 exports.addUdemyCourse = (req, res) => {
   Udemy
     .create(req.body)
-    //Aqui va los campos del model o le pasamos un  objeto json
     .then(udemyCourse => {
       res.status(200).json({ udemyCourse })
     })

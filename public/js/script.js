@@ -6,7 +6,6 @@ window.onload = () => {
   if (localStorage.getItem('token')) {
     window.location = "../home.html"
   }
-
   addComponent('footer', footer())
 }
 
@@ -22,7 +21,7 @@ document.getElementById('signup').addEventListener("click", function () {
       console.log("segunda entrada")
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('email', response.data.email)
-      localStorage.setItem('name', response.data.userName)
+      localStorage.setItem('userName', response.data.userName)
       goEditProfile()
     })
     .catch(function (error) {
