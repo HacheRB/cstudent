@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/HacheRB/cstudent#readme",
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "yarn-upgrade-all": "^0.5.4"
   },
   "dependencies": {
     "axios": "^0.21.1",
